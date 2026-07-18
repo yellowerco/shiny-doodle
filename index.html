@@ -1,12 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Yellower Design Studio: diseño, estrategia y tecnología para marcas con propósito.">
+  <title>Yellower Design Studio</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <p>Hello World!</p>
-    <a href="https://google.com"><button>Test HTTPS</button></a>
+  <main>
+    <section class="hero" id="inicio">
+      <nav class="nav shell" aria-label="Navegación principal">
+        <a class="logo" href="#inicio" aria-label="Yellower Design Studio, inicio">YELLOWER<span>®</span></a>
+        <div class="navLinks">
+          <a href="#estudio">Estudio</a><a href="#servicios">Servicios</a><a href="#equipo">Equipo</a>
+          <a href="https://www.instagram.com/yellower.co/" target="_blank" rel="noreferrer">Instagram ↗</a>
+        </div>
+        <a class="pill pillYellow" href="https://wa.me/573134553455" target="_blank" rel="noreferrer">Trabajemos juntos ↗</a>
+      </nav>
+
+      <img class="heroPhoto" src="images/yellower-cover.png" alt="Yani Plazas y Matthew Becker, equipo de Yellower Design Studio">
+      <div class="heroShade"></div>
+      <div class="heroContent shell">
+        <p class="micro">Creative studio · Colombia & worldwide</p>
+        <h1><small>The</small> Yellower<br>Design Studio</h1>
+        <p class="heroLead">Diseño, estrategia y tecnología para marcas con propósito.</p>
+        <div class="heroButtons">
+          <a class="pill pillYellow" href="#estudio">Conócenos ↗</a>
+          <a class="pill pillCream" href="#servicios">Cómo podemos ayudarte ↗</a>
+          <a class="pill pillYellow" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20contarles%20sobre%20mi%20proyecto" target="_blank" rel="noreferrer">Cuéntanos tu idea ↗</a>
+        </div>
+      </div>
+      <div class="ribbonStage">
+        <div class="ribbon ribbonCream" aria-hidden="true"><div class="ribbonTrack"><span>CREATIVIDAD CON PROPÓSITO ✦ DISEÑO QUE CONECTA ✦ SISTEMAS QUE SOSTIENEN ✦ MARCAS QUE CRECEN ✦ </span><span>CREATIVIDAD CON PROPÓSITO ✦ DISEÑO QUE CONECTA ✦ SISTEMAS QUE SOSTIENEN ✦ MARCAS QUE CRECEN ✦ </span></div></div>
+        <div class="ribbon ribbonYellow" aria-hidden="true"><div class="ribbonTrack"><span>CREATIVIDAD CON PROPÓSITO ✦ DISEÑO QUE CONECTA ✦ SISTEMAS QUE SOSTIENEN ✦ MARCAS QUE CRECEN ✦ </span><span>CREATIVIDAD CON PROPÓSITO ✦ DISEÑO QUE CONECTA ✦ SISTEMAS QUE SOSTIENEN ✦ MARCAS QUE CRECEN ✦ </span></div></div>
+      </div>
+    </section>
+
+    <section class="about shell" id="estudio">
+      <div class="aboutCopy">
+        <p class="micro dark">Un estudio creativo diferente</p>
+        <h2>Construimos marcas que se sienten <em>tan bien</em> como se ven.</h2>
+        <p>Nos especializamos en marcas wellness, negocios con propósito y proyectos enfocados en el bienestar. También creamos soluciones personalizadas para empresas que necesitan integrar creatividad, estrategia y tecnología.</p>
+        <a class="pill pillYellow outlined" href="#servicios">Descubre lo que hacemos ↗</a>
+      </div>
+      <div class="aboutCollage">
+        <img class="collageMain" src="images/yani-matt-main.png" alt="Yani y Matthew trabajando juntos">
+        <img class="collageYani" src="images/yani-new.png" alt="Yani Plazas, directora creativa">
+        <img class="collageMatt" src="images/yani-matt-secondary.png" alt="Yani y Matthew">
+        <span class="badge">CREATIVE<br>+ DIGITAL<br>STUDIO ↗</span>
+      </div>
+    </section>
+
+    <section class="services" id="servicios">
+      <div class="servicesHead shell">
+        <p class="micro dark">What we offer</p>
+        <h2>Creatividad por fuera.<br><em>Estrategia por dentro.</em></h2>
+        <p>Servicios pensados para hacer visible el valor de tu marca y construir una estructura lista para crecer.</p>
+      </div>
+      <div class="serviceList shell">
+        <article><span>01</span><h3>Branding & dirección creativa</h3><p>Identidades visuales con intención, estrategia y una expresión que conecta con las personas correctas.</p><b>↗</b></article>
+        <article><span>02</span><h3>Contenido & social media</h3><p>Estrategia, diseño y gestión de contenido para construir una presencia digital coherente y memorable.</p><b>↗</b></article>
+        <article><span>03</span><h3>Diseño web & experiencias</h3><p>Sitios y productos digitales claros, atractivos y pensados para acompañar el crecimiento de tu negocio.</p><b>↗</b></article>
+        <article><span>04</span><h3>Sistemas & automatización</h3><p>Soluciones tecnológicas y procesos escalables que simplifican la operación y conectan tus herramientas.</p><b>↗</b></article>
+      </div>
+    </section>
+
+    <section class="team" id="equipo">
+      <div class="teamHead shell"><p class="micro">Detrás de Yellower</p><h2>Dos miradas.<br><em>Una visión integral.</em></h2></div>
+      <div class="teamCards shell">
+        <article class="personCard"><img src="images/yani-new.png" alt="Retrato profesional de Yani Plazas"><div><span>Creative Director & Graphic Designer</span><h3>Yani Plazas</h3><p>Lidera la estrategia creativa, el branding y la comunicación visual para transformar ideas en marcas memorables y con propósito.</p></div></article>
+        <article class="personCard"><img src="images/matthew-new.png" alt="Retrato profesional de Matthew Becker"><div><span>Developer & Digital Systems Specialist</span><h3>Matthew Becker</h3><p>Desarrolla sistemas, automatizaciones y soluciones tecnológicas que permiten a los negocios operar mejor y escalar.</p></div></article>
+      </div>
+      <div class="cta shell"><p>¿Tienes una idea en mente?</p><h2>Hagamos algo<br><em>con intención.</em></h2><a class="pill pillDark" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20hablarles%20sobre%20un%20nuevo%20proyecto" target="_blank" rel="noreferrer">Hablemos por WhatsApp ↗</a></div>
+      <footer class="footer shell"><a class="logo" href="#inicio">YELLOWER<span>®</span></a><p>Diseño, estrategia y tecnología para crecer con propósito.</p><a class="instagramLink" href="https://www.instagram.com/yellower.co/" target="_blank" rel="noreferrer">Instagram · @yellower.co ↗</a><p>© <span id="year">2026</span> Yellower Design Studio®</p></footer>
+    </section>
+  </main>
 </body>
 </html>
