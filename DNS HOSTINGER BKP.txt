@@ -1,0 +1,2 @@
+CNAME   www   yellowerdesignstudio.com  300
+A   @   2.57.91.91  3600
