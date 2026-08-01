@@ -132,7 +132,7 @@
   .stage{
     position:relative;
     width:360px;
-    height:440px;
+    height:250px;
     max-width:92vw;
     display:flex;
     align-items:flex-end;

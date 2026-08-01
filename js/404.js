@@ -1,6 +1,6 @@
 (function(){
   const MIN_PETALS = 8;
-  const MAX_PETALS = 16;
+  const MAX_PETALS = 10;
 
   const flower = document.getElementById('flower');
   const flashEl = document.getElementById('flash');
