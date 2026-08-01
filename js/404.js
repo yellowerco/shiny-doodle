@@ -20,7 +20,7 @@
   const lovesCopy = [
     {
       title: 'Bueno, esa personita sí te quiere.',
-      text: 'Como nosotros queremos ser parte de tu equipo. Pero esta página la movimos o ya no existe, ups. Regresa al inicio o cuéntanos qué buscabas por WhatsApp.'
+      text: 'Tanto como nosotros queremos ser parte de tu equipo. Pero esta página la movimos o ya no existe, ups. Regresa al inicio o cuéntanos qué buscabas por WhatsApp.'
     }
   ];
 
