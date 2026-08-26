@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas & Automatización — Yellower Design Studio®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+  <link rel="shortcut icon" href="../favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+  <link rel="manifest" href="../favicon/site.webmanifest" />
+<style>
+  :root{
+    --cream:#EEEFE9;
+    --black:#202020;
+    --yellow:#FFD45F;
+    --yellow-deep:#F2B93E;
+    --grey:#6B6B63;
+    --rule: rgba(32,32,32,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--black);
+    font-family:'Archivo', sans-serif;
+    font-weight:500;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit;}
+  .editorial{
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style:italic;
+    font-weight:400;
+  }
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:12px;
+    font-weight:700;
+    color:var(--grey);
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:80;
+    background:rgba(238,239,233,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-weight:900;
+    letter-spacing:0.04em;
+    font-size:18px;
+    text-decoration:none;
+  }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
+  .nav-links a{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    font-weight:700;
+    text-decoration:none;
+    color:var(--black);
+    opacity:0.75;
+    transition:opacity .2s ease;
+  }
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{
+    background:var(--black);
+    color:var(--cream) !important;
+    padding:10px 18px;
+    border-radius:999px;
+    opacity:1 !important;
+  }
+  @media (max-width:720px){
+    .nav-links a:not(.nav-cta){display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:900px;
+    margin:0 auto;
+    padding:88px 32px 20px;
+    text-align:center;
+  }
+  .hero .eyebrow{margin-bottom:20px;}
+  .hero h1{
+    font-size:clamp(34px, 5.6vw, 66px);
+    line-height:1.04;
+    font-weight:900;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+  }
+  .hero p.lead{
+    max-width:600px;
+    margin:0 auto;
+    font-size:16px;
+    color:var(--grey);
+    font-weight:500;
+  }
+
+  .marquee{
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    overflow:hidden;
+    padding:14px 0;
+    white-space:nowrap;
+    margin-top:40px;
+  }
+  .marquee-track{
+    display:inline-block;
+    animation: scroll 30s linear infinite;
+  }
+  .marquee span{
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-weight:700;
+    color:var(--grey);
+    padding:0 18px;
+  }
+  .marquee span.accent{color:var(--black);}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+  }
+
+  /* ---------- NEEDS PICKER ---------- */
+  .picker-section{
+    max-width:980px;
+    margin:0 auto;
+    padding:64px 32px 30px;
+    text-align:center;
+  }
+  .picker-eyebrow{margin-bottom:14px;}
+  .picker-section h2{
+    font-size:clamp(24px, 3.4vw, 34px);
+    font-weight:900;
+    letter-spacing:-0.01em;
+    margin:0 0 12px;
+  }
+  .picker-section .picker-sub{
+    font-size:13.5px;
+    color:var(--grey);
+    font-weight:500;
+    margin:0 0 36px;
+  }
+
+  .needs-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:8px;
+  }
+  .need-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--cream);
+    border:2px solid var(--black);
+    border-radius:999px;
+    padding:11px 18px;
+    font-family:'Archivo', sans-serif;
+    font-size:13px;
+    font-weight:700;
+    color:var(--black);
+    cursor:pointer;
+    transition:background .2s ease, transform .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .need-chip .n-icon{font-size:15px;}
+  .need-chip:hover{transform:translateY(-2px);}
+  .need-chip.active{
+    background:var(--black);
+    color:var(--cream);
+    border-color:var(--yellow);
+  }
+  .need-chip .n-check{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:0;
+    opacity:0;
+    overflow:hidden;
+    transition:width .25s ease, opacity .2s ease;
+  }
+  .need-chip.active .n-check{
+    width:16px;
+    opacity:1;
+  }
+  .need-chip.active .n-check svg{
+    width:14px;
+    height:14px;
+    color:var(--yellow);
+  }
+  .need-chip.pop{
+    animation: chipPop .4s ease;
+  }
+  @keyframes chipPop{
+    0%{ transform:scale(1); }
+    35%{ transform:scale(1.08); }
+    100%{ transform:scale(1); }
+  }
+
+  /* ---------- DETAIL PANEL ---------- */
+  .panel-wrap{
+    max-width:820px;
+    margin:44px auto 0;
+    padding:0 32px;
+  }
+  .detail-panel{
+    background:var(--cream);
+    border:2px solid var(--black);
+    border-radius:24px;
+    padding:44px 44px 40px;
+    text-align:left;
+    position:relative;
+    overflow:hidden;
+  }
+  .detail-panel::before{
+    content:"✳";
+    position:absolute;
+    top:-18px;
+    right:24px;
+    font-size:80px;
+    color:rgba(255,212,95,0.35);
+    font-weight:900;
+    line-height:1;
+    pointer-events:none;
+  }
+  .panel-nav{
+    position:absolute;
+    top:20px;
+    right:20px;
+    display:flex;
+    gap:8px;
+    z-index:2;
+  }
+  .panel-nav-btn{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--black);
+    color:var(--cream);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease, transform .2s ease;
+  }
+  .panel-nav-btn:hover{
+    background:var(--yellow);
+    color:var(--black);
+    transform:translateY(-2px);
+  }
+  .panel-nav-btn svg{
+    width:16px;
+    height:16px;
+  }
+  .panel-inner{
+    position:relative;
+    z-index:1;
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  .panel-inner.show{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .panel-icon{
+    font-size:38px;
+    margin-bottom:16px;
+    display:block;
+  }
+  .panel-answer{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    color:var(--grey);
+    background:rgba(255,212,95,0.4);
+    border-radius:8px;
+    padding:5px 10px;
+    margin:0 0 18px;
+  }
+  .panel-answer strong{color:var(--black); font-weight:800;}
+  .panel-tag{
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--grey);
+    margin:0 0 8px;
+  }
+  .detail-panel h3{
+    font-size:clamp(22px, 3vw, 30px);
+    font-weight:900;
+    letter-spacing:-0.01em;
+    margin:0 0 14px;
+    max-width:520px;
+  }
+  .detail-panel .panel-desc{
+    font-size:15px;
+    color:var(--grey);
+    font-weight:500;
+    max-width:520px;
+    margin:0 0 26px;
+    line-height:1.6;
+  }
+  .panel-bullets{
+    list-style:none;
+    margin:0 0 30px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    max-width:480px;
+  }
+  .panel-bullets li{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    font-size:14px;
+    font-weight:600;
+  }
+  .panel-bullets li .check{
+    flex-shrink:0;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:var(--black);
+    color:var(--yellow);
+    font-size:11px;
+    font-weight:900;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:1px;
+  }
+  .panel-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    background:var(--black);
+    color:var(--cream);
+    font-weight:800;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    padding:14px 24px;
+    border-radius:999px;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .panel-cta:hover{background:#000; transform:translateY(-2px);}
+
+  @media (max-width:640px){
+    .detail-panel{padding:34px 26px 30px;}
+    .detail-panel::before{font-size:60px; top:-10px; right:14px;}
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process-section{
+    max-width:1180px;
+    margin:0 auto;
+    padding:80px 32px 20px;
+  }
+  .process-head{
+    text-align:center;
+    margin-bottom:44px;
+  }
+  .process-head h2{
+    font-size:clamp(24px, 3.4vw, 34px);
+    font-weight:900;
+    letter-spacing:-0.01em;
+    margin:10px 0 0;
+  }
+  .process-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .process-step{
+    background:var(--cream);
+    border:2px solid var(--black);
+    border-radius:18px;
+    padding:28px 26px;
+    position:relative;
+  }
+  .process-step .p-num{
+    font-family:Georgia, serif;
+    font-style:italic;
+    font-size:34px;
+    font-weight:400;
+    color:var(--yellow-deep);
+    margin:0 0 14px;
+    -webkit-text-stroke:1.5px var(--black);
+  }
+  .process-step h4{
+    font-size:16px;
+    font-weight:800;
+    margin:0 0 8px;
+  }
+  .process-step p{
+    font-size:13.5px;
+    color:var(--grey);
+    font-weight:500;
+    margin:0;
+    line-height:1.5;
+  }
+  @media (max-width:820px){
+    .process-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- CLOSING CTA ---------- */
+  .closing{
+    max-width:680px;
+    margin:70px auto 0;
+    padding:0 32px;
+    text-align:center;
+  }
+  .closing-box{
+    background:var(--black);
+    color:var(--cream);
+    border-radius:22px;
+    padding:48px 40px;
+  }
+  .closing-box .eyebrow{color:var(--yellow); margin-bottom:16px;}
+  .closing-box h2{
+    font-size:clamp(24px, 3.4vw, 32px);
+    font-weight:900;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+  }
+  .closing-box h2 .editorial{color:var(--yellow);}
+  .closing-box p{
+    color:rgba(238,239,233,0.72);
+    font-size:14.5px;
+    max-width:420px;
+    margin:0 auto 28px;
+  }
+  .btn-yellow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    background:var(--yellow);
+    color:var(--black);
+    font-weight:800;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    padding:15px 28px;
+    border-radius:999px;
+    transition:transform .2s ease;
+  }
+  .btn-yellow:hover{transform:translateY(-2px);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:64px 32px 48px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+  footer .logo{font-size:16px;}
+  footer .fine{
+    font-size:13px;
+    color:var(--grey);
+  }
+  footer a.ig{
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    color:var(--black);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="https://yellowerdesignstudio.com/">YELLOWER®</a>
+    <nav class="nav-links">
+      <a href="https://yellowerdesignstudio.com/">Volver al sitio ↗</a>
+      <a class="nav-cta" href="https://wa.me/573134553455" target="_blank" rel="noopener">Escríbenos ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="eyebrow">Yellower Design Studio® ✳ Sistemas & Automatización</p>
+    <h1>Hay un <span class="editorial">sistema</span> esperando ser construido.</h1>
+    <p class="lead">Detrás de cada tarea repetitiva, cada hoja de cálculo manual o cada "otra vez tengo que hacer esto a mano", hay un sistema esperando ser construido. Cuéntanos qué te quita tiempo y lo resolvemos desde el código.</p>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="accent">APIS</span><span>✦</span><span>BOTS</span><span>✦</span><span class="accent">AUTOMATIZACIÓN DE PROCESOS</span><span>✦</span><span>SISTEMAS A LA MEDIDA</span><span>✦</span>
+      <span class="accent">APIS</span><span>✦</span><span>BOTS</span><span>✦</span><span class="accent">AUTOMATIZACIÓN DE PROCESOS</span><span>✦</span><span>SISTEMAS A LA MEDIDA</span><span>✦</span>
+    </div>
+  </div>
+
+  <section class="picker-section">
+    <p class="eyebrow picker-eyebrow">✳ Elige tu necesidad</p>
+    <h2>¿Qué necesitas automatizar hoy?</h2>
+    <p class="picker-sub">Elige la frase que más se parezca a lo tuyo — puedes cambiar de opción cuando quieras.</p>
+
+    <div class="needs-grid" id="needsGrid">
+      <!-- chips injected by JS -->
+    </div>
+  </section>
+
+  <div class="panel-wrap" id="panelWrap">
+    <div class="detail-panel">
+      <div class="panel-nav">
+        <button type="button" class="panel-nav-btn" id="panelPrevBtn" aria-label="Necesidad anterior">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button type="button" class="panel-nav-btn" id="panelNextBtn" aria-label="Siguiente necesidad">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="panel-inner" id="panelInner">
+        <!-- content injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <section class="process-section">
+    <div class="process-head">
+      <p class="eyebrow">✳ Cómo lo hacemos</p>
+      <h2>De la necesidad al <span class="editorial">sistema.</span></h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <p class="p-num">01</p>
+        <h4>Diagnóstico</h4>
+        <p>Entendemos tu proceso actual: qué haces manualmente, dónde se pierde tiempo y qué herramientas ya usas.</p>
+      </div>
+      <div class="process-step">
+        <p class="p-num">02</p>
+        <h4>Desarrollo a la medida</h4>
+        <p>Matt lo construye desde código — sin plantillas genéricas — pensado exactamente para tu forma de trabajar.</p>
+      </div>
+      <div class="process-step">
+        <p class="p-num">03</p>
+        <h4>Implementación y acompañamiento</h4>
+        <p>Lo dejamos funcionando, te explicamos cómo usarlo y quedamos cerca por si necesitas ajustes.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="closing">
+    <div class="closing-box">
+      <p class="eyebrow">¿No está tu caso?</p>
+      <h2>Cuéntanos igual, <span class="editorial">seguro ya la resolvimos.</span></h2>
+      <p>Cada negocio tiene su propio caos particular. Si tu necesidad no está en la lista, escríbenos y lo revisamos juntos.</p>
+      <a class="btn-yellow" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20tengo%20una%20necesidad%20de%20automatizaci%C3%B3n%20que%20no%20vi%20en%20la%20lista%2C%20les%20cuento%3A" target="_blank" rel="noopener">Escríbenos por WhatsApp ↗</a>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <a class="logo" href="https://yellowerdesignstudio.com/">YELLOWER®</a>
+    </div>
+    <p class="fine">© 2026 Yellower Design Studio® — Todos los derechos reservados.</p>
+    <a class="ig" href="https://www.instagram.com/yellower.co/" target="_blank" rel="noopener">Instagram · @yellower.co ↗</a>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const needs = [
+    {
+      icon: '📦',
+      chip: 'Necesito automatizar mi inventario',
+      tag: 'Inventario',
+      title: 'Automatización de inventario',
+      desc: 'Que tu stock se actualice solo, sin hojas de cálculo manuales ni sorpresas de última hora cuando algo se agota.',
+      bullets: [
+        'Sincronización entre tienda, bodega y ventas',
+        'Alertas automáticas cuando el stock está bajo',
+        'Reportes en tiempo real, sin digitarlos a mano'
+      ],
+      wa: 'Hola%20Yellower%2C%20necesito%20automatizar%20mi%20inventario%20%F0%9F%93%A6'
+    },
+    {
+      icon: '📧',
+      chip: 'Quiero automatizar mailings para mis clientes fieles',
+      tag: 'Email marketing',
+      title: 'Automatización de email marketing',
+      desc: 'Que tus clientes reciban el mensaje correcto, en el momento correcto, sin que tengas que enviarlo uno por uno.',
+      bullets: [
+        'Secuencias automáticas por comportamiento o fecha',
+        'Segmentación entre clientes frecuentes y nuevos',
+        'Reportes de apertura y clics, sin hojas externas'
+      ],
+      wa: 'Hola%20Yellower%2C%20quiero%20automatizar%20mailings%20para%20mis%20clientes%20fieles%20%F0%9F%93%A7'
+    },
+    {
+      icon: '🔔',
+      chip: 'Quiero un bot para que me notifique algo',
+      tag: 'Notificaciones',
+      title: 'Bots de notificación',
+      desc: 'Que un bot te avise a ti o a tu equipo exactamente cuando algo importante pasa, sin revisar todo manualmente.',
+      bullets: [
+        'Alertas por WhatsApp, Telegram o correo',
+        'Notificaciones basadas en condiciones que tú defines',
+        'Integración con las herramientas que ya usas'
+      ],
+      wa: 'Hola%20Yellower%2C%20quiero%20un%20bot%20que%20me%20notifique%20algo%20%F0%9F%94%94'
+    },
+    {
+      icon: '🔌',
+      chip: 'Quiero conectar mis plataformas con una API',
+      tag: 'Integraciones',
+      title: 'Integraciones y APIs',
+      desc: 'Que tus sistemas se hablen entre sí — tu tienda, tu contabilidad, tu CRM — sin copiar y pegar información entre ellos.',
+      bullets: [
+        'Conexión entre plataformas que hoy no se comunican',
+        'Automatización de tareas repetitivas entre sistemas',
+        'Documentación clara de cada integración'
+      ],
+      wa: 'Hola%20Yellower%2C%20quiero%20conectar%20mis%20plataformas%20con%20una%20API%20%F0%9F%94%8C'
+    },
+    {
+      icon: '💬',
+      chip: 'Necesito un bot que responda preguntas frecuentes',
+      tag: 'Atención automatizada',
+      title: 'Chatbots y atención automatizada',
+      desc: 'Que las preguntas repetidas de tus clientes se respondan solas, y tu equipo se enfoque en lo que sí necesita atención humana.',
+      bullets: [
+        'Respuestas automáticas disponibles 24/7',
+        'Derivación a una persona cuando es necesario',
+        'Entrenado con la información real de tu negocio'
+      ],
+      wa: 'Hola%20Yellower%2C%20necesito%20un%20bot%20que%20responda%20preguntas%20frecuentes%20%F0%9F%92%AC'
+    },
+    {
+      icon: '📊',
+      chip: 'Quiero automatizar mis reportes internos',
+      tag: 'Reportes',
+      title: 'Reportes y dashboards automáticos',
+      desc: 'Que tus números se actualicen solos, y dejes de armar el mismo reporte a mano cada semana.',
+      bullets: [
+        'Dashboards conectados a tus datos reales',
+        'Reportes programados que llegan solos',
+        'Menos Excel, más decisiones'
+      ],
+      wa: 'Hola%20Yellower%2C%20quiero%20automatizar%20mis%20reportes%20internos%20%F0%9F%93%8A'
+    },
+    {
+      icon: '⏰',
+      chip: 'Necesito que mis clientes reciban recordatorios automáticos',
+      tag: 'Recordatorios',
+      title: 'Recordatorios y seguimiento automático',
+      desc: 'Que nadie se te escape: pagos, citas o seguimientos recordados automáticamente sin que tú estés pendiente.',
+      bullets: [
+        'Recordatorios por WhatsApp, correo o SMS',
+        'Seguimiento automático a clientes inactivos',
+        'Menos tareas manuales para tu equipo'
+      ],
+      wa: 'Hola%20Yellower%2C%20necesito%20que%20mis%20clientes%20reciban%20recordatorios%20autom%C3%A1ticos%20%E2%8F%B0'
+    },
+    {
+      icon: '📋',
+      chip: 'Quiero sincronizar mis formularios con un CRM',
+      tag: 'Sincronización de datos',
+      title: 'Sincronización de formularios y datos',
+      desc: 'Que cada formulario que llenan tus clientes caiga directo donde lo necesitas, sin exportar ni copiar nada.',
+      bullets: [
+        'Conexión automática entre formularios y CRM o Sheets',
+        'Organización automática de la información entrante',
+        'Menos errores de digitación manual'
+      ],
+      wa: 'Hola%20Yellower%2C%20quiero%20sincronizar%20mis%20formularios%20con%20un%20CRM%20%F0%9F%93%8B'
+    }
+  ];
+
+  const needsGrid = document.getElementById('needsGrid');
+  const panelInner = document.getElementById('panelInner');
+
+  function renderChips(activeIndex){
+    needsGrid.innerHTML = '';
+    needs.forEach((need, i) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'need-chip' + (i === activeIndex ? ' active' : '');
+      chip.innerHTML = `<span class="n-icon">${need.icon}</span><span>${need.chip}</span><span class="n-check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+      chip.addEventListener('click', () => selectNeed(i));
+      needsGrid.appendChild(chip);
+    });
+    const activeChip = needsGrid.children[activeIndex];
+    if(activeChip){
+      activeChip.classList.add('pop');
+      activeChip.addEventListener('animationend', () => activeChip.classList.remove('pop'), { once:true });
+    }
+  }
+
+  function renderPanel(index){
+    const need = needs[index];
+    panelInner.classList.remove('show');
+
+    setTimeout(() => {
+      panelInner.innerHTML = `
+        <p class="panel-answer">Elegiste: <strong>“${need.chip}”</strong></p>
+        <span class="panel-icon">${need.icon}</span>
+        <p class="panel-tag">${need.tag}</p>
+        <h3>${need.title}</h3>
+        <p class="panel-desc">${need.desc}</p>
+        <ul class="panel-bullets">
+          ${need.bullets.map(b => `<li><span class="check">✓</span>${b}</li>`).join('')}
+        </ul>
+        <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${need.wa}">Cuéntanos tu caso ↗</a>
+      `;
+      requestAnimationFrame(() => panelInner.classList.add('show'));
+    }, 180);
+  }
+
+  let currentIndex = 0;
+
+  function selectNeed(index){
+    currentIndex = index;
+    renderChips(index);
+    renderPanel(index);
+  }
+
+  const panelPrevBtn = document.getElementById('panelPrevBtn');
+  const panelNextBtn = document.getElementById('panelNextBtn');
+
+  panelPrevBtn.addEventListener('click', () => {
+    const prev = (currentIndex - 1 + needs.length) % needs.length;
+    selectNeed(prev);
+  });
+
+  panelNextBtn.addEventListener('click', () => {
+    const next = (currentIndex + 1) % needs.length;
+    selectNeed(next);
+  });
+
+  selectNeed(0);
+})();
+</script>
+
+</body>
+</html>
