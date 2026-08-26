@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diseño Web — Yellower Design Studio®</title>
+<title>Branding & Dirección Creativa — Yellower Design Studio®</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
@@ -113,7 +113,7 @@
     margin:0 0 22px;
   }
   .hero p.lead{
-    max-width:560px;
+    max-width:540px;
     margin:0 auto;
     font-size:16px;
     color:var(--grey);
@@ -147,48 +147,6 @@
   }
   @media (prefers-reduced-motion: reduce){
     .marquee-track{animation:none;}
-  }
-
-  /* ---------- TIMELINE STRIP ---------- */
-  .timeline-wrap{
-    max-width:1180px;
-    margin:0 auto;
-    padding:48px 32px 0;
-  }
-  .timeline{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:16px;
-  }
-  .timeline-item{
-    background:var(--cream);
-    border:2px solid var(--black);
-    border-radius:16px;
-    padding:20px 22px;
-    text-align:center;
-  }
-  .timeline-item .t-icon{font-size:22px; margin-bottom:8px;}
-  .timeline-item .t-name{
-    font-size:12px;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-    color:var(--grey);
-    margin:0 0 6px;
-  }
-  .timeline-item .t-days{
-    font-size:20px;
-    font-weight:900;
-  }
-  .timeline-note{
-    max-width:640px;
-    margin:20px auto 0;
-    text-align:center;
-    font-size:12.5px;
-    color:var(--grey);
-  }
-  @media (max-width:720px){
-    .timeline{grid-template-columns:1fr;}
   }
 
   /* ---------- DECK SECTION ---------- */
@@ -289,7 +247,7 @@
     position:relative;
     width:420px;
     max-width:92vw;
-    height:530px;
+    height:560px;
   }
 
   .card-plan{
@@ -354,17 +312,17 @@
     font-size:26px;
     font-weight:900;
     letter-spacing:-0.01em;
-    margin:0 0 10px;
+    margin:0 0 2px;
   }
   .plan-desc{
     font-size:13.5px;
     color:var(--grey);
     font-weight:500;
-    margin:0 0 20px;
+    margin:0 0 18px;
     line-height:1.5;
   }
 
-  .price-block{margin-bottom:14px;}
+  .price-block{margin-bottom:16px;}
   .price-row{
     display:flex;
     align-items:baseline;
@@ -412,20 +370,6 @@
   }
   .discount-badge.show{opacity:1; transform:scale(1);}
 
-  .delivery-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    background:var(--yellow);
-    border:1.5px solid var(--black);
-    border-radius:999px;
-    padding:7px 14px;
-    width:fit-content;
-    font-size:12px;
-    font-weight:800;
-    margin-bottom:20px;
-  }
-
   .rule{
     border:none;
     border-top:1px solid var(--rule);
@@ -454,7 +398,8 @@
   }
   .features::-webkit-scrollbar{display:none;}
 
-  /* Custom scrollbar: a thumb with arrow tails that stretch to hint direction. */
+  /* Custom scrollbar: a thumb with an arrow tail that stretches downward,
+     drawn right where the real scrollbar would sit. */
   .scroll-track{
     position:absolute;
     top:2px;
@@ -505,10 +450,14 @@
     opacity:0;
     transition:opacity .3s ease;
   }
+  /* Bottom arrow: visible whenever there's more below; pulses only before the
+     user has started scrolling, inviting them down. */
   .features-wrap.has-more:not(.at-bottom) .thumb-arrow-bottom{ opacity:1; }
   .features-wrap.has-more.unscrolled .thumb-arrow-bottom{
     animation: thumbStretchDown 1.8s ease-in-out infinite;
   }
+  /* Top arrow: visible once the user has scrolled away from the top; pulses
+     once they've hit the bottom, inviting them back up. */
   .features-wrap.has-more:not(.unscrolled) .thumb-arrow-top{ opacity:1; }
   .features-wrap.has-more.at-bottom .thumb-arrow-top{
     animation: thumbStretchUp 1.8s ease-in-out infinite;
@@ -557,7 +506,7 @@
     letter-spacing:0.06em;
     padding:14px 20px;
     border-radius:999px;
-    margin-top:auto;
+    margin-top:14px;
     transition:transform .2s ease, background .2s ease;
   }
   .card-cta:hover{background:#000; transform:translateY(-2px);}
@@ -637,12 +586,9 @@
   .disclaimer p strong{font-weight:800;}
 
   @media (max-width:480px){
-    .disclaimer{padding:18px 20px;}
-  }
-
-  @media (max-width:480px){
     .deck{height:600px;}
     .card-plan{padding:32px 24px 26px;}
+    .disclaimer{padding:18px 20px;}
   }
 
   /* ---------- FOOTER ---------- */
@@ -683,38 +629,17 @@
 
 <main>
   <section class="hero">
-    <p class="eyebrow">Yellower Design Studio® ✳ Website Design</p>
-    <h1>Tu próxima <span class="editorial">página web.</span></h1>
-    <p class="lead">Desde una landing enfocada en convertir, hasta una tienda completa para vender online. Explora las tres carpetas y encuentra la tuya — <span class="editorial">con intención.</span></p>
+    <p class="eyebrow">Yellower Design Studio® ✳ Branding & Dirección Creativa</p>
+    <h1>Elige tu <span class="editorial">pack.</span></h1>
+    <p class="lead">Estrategia, diseño y dirección creativa para que tu marca se vea como se siente. Explora los tres packs — <span class="editorial">con intención.</span></p>
   </section>
 
   <div class="marquee">
     <div class="marquee-track">
-      <span class="accent">LANDING PAGES</span><span>✦</span><span>SITIOS WEB</span><span>✦</span><span class="accent">TIENDAS ONLINE</span><span>✦</span><span>DISEÑO QUE CONVIERTE</span><span>✦</span>
-      <span class="accent">LANDING PAGES</span><span>✦</span><span>SITIOS WEB</span><span>✦</span><span class="accent">TIENDAS ONLINE</span><span>✦</span><span>DISEÑO QUE CONVIERTE</span><span>✦</span>
+      <span class="accent">BRANDING</span><span>✦</span><span>DIRECCIÓN CREATIVA</span><span>✦</span><span class="accent">ESTRATEGIA DE MARCA</span><span>✦</span><span>DISEÑO CON INTENCIÓN</span><span>✦</span>
+      <span class="accent">BRANDING</span><span>✦</span><span>DIRECCIÓN CREATIVA</span><span>✦</span><span class="accent">ESTRATEGIA DE MARCA</span><span>✦</span><span>DISEÑO CON INTENCIÓN</span><span>✦</span>
     </div>
   </div>
-
-  <section class="timeline-wrap">
-    <div class="timeline">
-      <div class="timeline-item">
-        <p class="t-icon">🚀</p>
-        <p class="t-name">Landing Page</p>
-        <p class="t-days">3 días</p>
-      </div>
-      <div class="timeline-item">
-        <p class="t-icon">🌐</p>
-        <p class="t-name">Página Web</p>
-        <p class="t-days">7 días hábiles</p>
-      </div>
-      <div class="timeline-item">
-        <p class="t-icon">🛒</p>
-        <p class="t-name">Tienda Online</p>
-        <p class="t-days">9 días hábiles</p>
-      </div>
-    </div>
-    <p class="timeline-note">✳ Los tiempos comienzan a contar una vez tengamos toda la información necesaria para iniciar el desarrollo del proyecto, o el primer 50% del pago inicial.</p>
-  </section>
 
   <section class="deck-section">
     <div class="promo-box" id="promoBox">
@@ -730,100 +655,140 @@
 
     <div class="deck" id="deck">
 
-      <article class="card-plan" data-plan="0" data-tab="yellow" data-regular="$700.000" data-preferential="$595.000">
+      <article class="card-plan" data-plan="0" data-tab="yellow" data-regular="$885.000" data-preferential="$750.000">
         <div class="tab">Plan 01</div>
         <div class="card-top">
-          <span class="plan-icon">🚀</span>
+          <span class="plan-icon">🌼</span>
           <div class="top-right">
-            <span class="plan-index">01 / 03</span>
+            <span class="plan-index">01 / 04</span>
             <button type="button" class="next-hint" aria-label="Ver siguiente plan"><span>Ver más</span><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
-        <h2>Landing Page</h2>
-        <p class="plan-desc">Una página diseñada para convertir visitantes en clientes, enfocada en un solo objetivo o servicio.</p>
+        <h2>Pack Margarita</h2>
+        <p class="plan-desc">La esencia visual necesaria para construir una marca sólida y coherente.</p>
         <div class="price-block">
           <div class="price-row">
-            <span class="price-old">$700.000</span>
-            <span class="price">$700.000</span>
+            <span class="price-old">$885.000</span>
+            <span class="price">$885.000</span>
             <span class="discount-badge">-15%</span>
           </div>
           <span class="price-unit">COP · pago único</span>
         </div>
-        <div class="delivery-row">⏱ Entrega: 3 días</div>
         <hr class="rule">
         <div class="features-wrap">
         <ul class="features">
-          <li><span class="check">✓</span> Diseño 100% enfocado en conversión</li>
-          <li><span class="check">✓</span> Un solo objetivo o servicio destacado</li>
-          <li><span class="check">✓</span> Ideal para campañas, lanzamientos o promociones</li>
+          <li><span class="check">✓</span> Logo principal</li>
+          <li><span class="check">✓</span> Variación de logo</li>
+          <li><span class="check">✓</span> Sistema tipográfico</li>
+          <li><span class="check">✓</span> Paleta de colores</li>
+          <li><span class="check">✓</span> Elementos decorativos</li>
+          <li><span class="check">✓</span> Línea visual – Brandboard</li>
+          <li><span class="check">✓</span> Dirección visual de marca</li>
         </ul>
         <div class="scroll-track"><div class="scroll-thumb"><span class="thumb-arrow-top"></span><span class="thumb-arrow-bottom"></span></div></div>
         </div>
-        <a class="card-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20la%20Landing%20Page%20%F0%9F%9A%80">Quiero este plan ↗</a>
+        <a class="card-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20el%20Pack%20Margarita%20%F0%9F%8C%BC">Quiero este plan ↗</a>
       </article>
 
-      <article class="card-plan" data-plan="1" data-tab="cream" data-regular="$1.400.000" data-preferential="$1.190.000">
+      <article class="card-plan" data-plan="1" data-tab="cream" data-regular="$1.120.000" data-preferential="$950.000">
         <div class="tab">Plan 02</div>
         <div class="card-top">
-          <span class="plan-icon">🌐</span>
+          <span class="plan-icon">🌷</span>
           <div class="top-right">
-            <span class="plan-index">02 / 03</span>
+            <span class="plan-index">02 / 04</span>
             <button type="button" class="next-hint" aria-label="Ver siguiente plan"><span>Ver más</span><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
-        <h2>Página Web</h2>
-        <p class="plan-desc">Un sitio con varias secciones que presenta tu empresa, genera confianza y muestra toda tu información.</p>
+        <h2>Pack Rosa</h2>
+        <p class="plan-desc">Una identidad visual más dinámica, pensada para marcas que quieren destacar y tener mayor versatilidad.</p>
         <div class="price-block">
           <div class="price-row">
-            <span class="price-old">$1.400.000</span>
-            <span class="price">$1.400.000</span>
+            <span class="price-old">$1.120.000</span>
+            <span class="price">$1.120.000</span>
             <span class="discount-badge">-15%</span>
           </div>
           <span class="price-unit">COP · pago único</span>
         </div>
-        <div class="delivery-row">⏱ Entrega: 7 días hábiles</div>
         <hr class="rule">
         <div class="features-wrap">
         <ul class="features">
-          <li><span class="check">✓</span> Varias secciones: inicio, nosotros, servicios, contacto</li>
-          <li><span class="check">✓</span> Diseño que genera confianza en tu marca</li>
-          <li><span class="check">✓</span> Toda tu información en un solo lugar</li>
+          <li><span class="check">✓</span> Todo lo incluido en Pack Margarita</li>
+          <li><span class="check">✓</span> Un diseño digital de papelería</li>
+          <li><span class="check">✓</span> Animación de logo</li>
         </ul>
         <div class="scroll-track"><div class="scroll-thumb"><span class="thumb-arrow-top"></span><span class="thumb-arrow-bottom"></span></div></div>
         </div>
-        <a class="card-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20la%20P%C3%A1gina%20Web%20%F0%9F%8C%90">Quiero este plan ↗</a>
+        <a class="card-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20el%20Pack%20Rosa%20%F0%9F%8C%B7">Quiero este plan ↗</a>
       </article>
 
-      <article class="card-plan" data-plan="2" data-tab="yellow" data-regular="$2.300.000" data-preferential="$1.955.000">
+      <article class="card-plan" data-plan="2" data-tab="yellow" data-regular="$1.415.000" data-preferential="$1.200.000">
         <div class="tab">Plan 03</div>
         <div class="card-top">
-          <span class="plan-icon">🛒</span>
+          <span class="plan-icon">🌸</span>
           <div class="top-right">
-            <span class="plan-index">03 / 03</span>
+            <span class="plan-index">03 / 04</span>
             <button type="button" class="next-hint" aria-label="Ver siguiente plan"><span>Ver más</span><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
-        <h2>Tienda Online</h2>
-        <p class="plan-desc">Un sitio donde los clientes pueden ver productos, comprarlos y pagar directamente por internet.</p>
+        <h2>Pack Florece</h2>
+        <p class="plan-desc">Una evolución visual para marcas que ya existen y necesitan renovarse sin perder su esencia.</p>
         <div class="price-block">
           <div class="price-row">
-            <span class="price-old">$2.300.000</span>
-            <span class="price">$2.300.000</span>
+            <span class="price-old">$1.415.000</span>
+            <span class="price">$1.415.000</span>
             <span class="discount-badge">-15%</span>
           </div>
           <span class="price-unit">COP · pago único</span>
         </div>
-        <div class="delivery-row">⏱ Entrega: 9 días hábiles</div>
         <hr class="rule">
         <div class="features-wrap">
         <ul class="features">
-          <li><span class="check">✓</span> Catálogo de productos con fotos y precios</li>
-          <li><span class="check">✓</span> Carrito de compras y pago en línea</li>
-          <li><span class="check">✓</span> Todo listo para empezar a vender</li>
+          <li><span class="check">✓</span> Análisis de la identidad actual</li>
+          <li><span class="check">✓</span> Actualización o rediseño de logo</li>
+          <li><span class="check">✓</span> Nuevas variaciones de logo</li>
+          <li><span class="check">✓</span> Actualización tipográfica</li>
+          <li><span class="check">✓</span> Nueva paleta de colores</li>
+          <li><span class="check">✓</span> Renovación de elementos decorativos</li>
+          <li><span class="check">✓</span> Actualización de línea visual</li>
+          <li><span class="check">✓</span> Nueva dirección visual de marca</li>
         </ul>
         <div class="scroll-track"><div class="scroll-thumb"><span class="thumb-arrow-top"></span><span class="thumb-arrow-bottom"></span></div></div>
         </div>
-        <a class="card-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20la%20Tienda%20Online%20%F0%9F%9B%92">Quiero este plan ↗</a>
+        <a class="card-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20el%20Pack%20Florece%20%F0%9F%8C%B8">Quiero este plan ↗</a>
+      </article>
+
+      <article class="card-plan" data-plan="3" data-tab="cream" data-regular="$1.765.000" data-preferential="$1.500.000">
+        <div class="tab">Plan 04</div>
+        <div class="card-top">
+          <span class="plan-icon">🌻</span>
+          <div class="top-right">
+            <span class="plan-index">04 / 04</span>
+            <button type="button" class="next-hint" aria-label="Ver siguiente plan"><span>Ver más</span><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <h2>Pack Girasol</h2>
+        <p class="plan-desc">Una identidad de marca completa, construida para mantener coherencia, personalidad y una dirección clara en cada punto de contacto.</p>
+        <div class="price-block">
+          <div class="price-row">
+            <span class="price-old">$1.765.000</span>
+            <span class="price">$1.765.000</span>
+            <span class="discount-badge">-15%</span>
+          </div>
+          <span class="price-unit">COP · pago único</span>
+        </div>
+        <hr class="rule">
+        <div class="features-wrap">
+        <ul class="features">
+          <li><span class="check">✓</span> Todo lo incluido en Pack Rosa</li>
+          <li><span class="check">✓</span> Paleta de colores + códigos Pantone</li>
+          <li><span class="check">✓</span> Manual de marca</li>
+          <li><span class="check">✓</span> 3 mockups de merch</li>
+          <li><span class="check">✓</span> Consultoría personalizada con Yani</li>
+          <li><span class="check">✓</span> Estrategia y proyección de marca</li>
+        </ul>
+        <div class="scroll-track"><div class="scroll-thumb"><span class="thumb-arrow-top"></span><span class="thumb-arrow-bottom"></span></div></div>
+        </div>
+        <a class="card-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quiero%20el%20Pack%20Girasol%20%F0%9F%8C%BB">Quiero este plan ↗</a>
       </article>
 
     </div>
@@ -832,11 +797,7 @@
       <button class="dot" data-plan="0" aria-label="Ver Plan 01"></button>
       <button class="dot" data-plan="1" aria-label="Ver Plan 02"></button>
       <button class="dot" data-plan="2" aria-label="Ver Plan 03"></button>
-    </div>
-
-    <div class="disclaimer">
-      <span class="disclaimer-mark">✳</span>
-      <p><strong>Importante:</strong> el valor de dominio y hosting son costos extra que cotizamos aparte antes de comenzar a trabajar.</p>
+      <button class="dot" data-plan="3" aria-label="Ver Plan 04"></button>
     </div>
   </section>
 
@@ -860,7 +821,7 @@
 (function(){
   const cards = Array.from(document.querySelectorAll('.card-plan'));
   const dots = Array.from(document.querySelectorAll('.dot'));
-  let order = [0,1,2]; // order[0] = frontmost plan index
+  let order = [0,1,2,3]; // order[0] = frontmost plan index
   let animating = false;
 
   function offsetFor(depth){
@@ -980,7 +941,7 @@
     dots.forEach(dot => {
       dot.classList.toggle('active', parseInt(dot.dataset.plan,10) === order[0]);
     });
-      featureWraps.forEach(updateScrollThumb);
+    featureWraps.forEach(updateScrollThumb);
   }
 
   function sendFrontToBack(){
