@@ -13,13 +13,539 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="MyWebSite" />
   <link rel="manifest" href="../favicon/site.webmanifest" />
-  <link rel="stylesheet" href="../css/tyc.css">
+<style>
+  :root{
+    --cream:#EEEFE9;
+    --black:#202020;
+    --yellow:#FFD45F;
+    --grey:#6B6B63;
+    --rule: rgba(32,32,32,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--black);
+    font-family:'Archivo', sans-serif;
+    font-weight:500;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
+  }
+
+  img, svg{
+    -webkit-user-drag:none;
+    user-drag:none;
+    -khtml-user-drag:none;
+    -moz-user-drag:none;
+    -o-user-drag:none;
+    pointer-events:none;
+  }
+
+  .editorial{
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style:italic;
+    font-weight:400;
+  }
+
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:12px;
+    font-weight:700;
+    color:var(--grey);
+  }
+
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(238,239,233,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-weight:900;
+    letter-spacing:0.04em;
+    font-size:18px;
+    text-decoration:none;
+  }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
+  .nav-links a{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    font-weight:700;
+    text-decoration:none;
+    color:var(--black);
+    opacity:0.75;
+    transition:opacity .2s ease;
+  }
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{
+    background:var(--black);
+    color:var(--cream) !important;
+    padding:10px 18px;
+    border-radius:999px;
+    opacity:1 !important;
+  }
+  .nav-cta:hover{background:#000;}
+
+  @media (max-width:720px){
+    .nav-links a:not(.nav-cta){display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:1180px;
+    margin:0 auto;
+    padding:100px 32px 64px;
+  }
+  .hero .eyebrow{margin-bottom:22px;}
+  .hero h1{
+    font-size:clamp(40px, 6.4vw, 84px);
+    line-height:0.98;
+    font-weight:900;
+    letter-spacing:-0.01em;
+    margin:0 0 28px;
+    max-width:920px;
+  }
+  .hero h1 .editorial{font-size:0.92em;}
+  .hero p.lead{
+    max-width:620px;
+    font-size:17px;
+    color:var(--grey);
+    font-weight:500;
+    margin:0 0 36px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px 40px;
+    padding-top:32px;
+    border-top:1px solid var(--rule);
+  }
+  .hero-meta div{max-width:260px;}
+  .hero-meta .eyebrow{margin-bottom:8px;}
+  .hero-meta p{margin:0;font-size:14px;color:var(--black);}
+
+  .positioning{
+    margin-top:40px;
+    padding:32px 36px;
+    background:var(--cream);
+    border:2px solid var(--black);
+    border-radius:20px;
+    text-align:center;
+  }
+  .positioning .p-tagline{
+    font-family:Georgia, serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(20px, 3vw, 28px);
+    margin:0 0 10px;
+    letter-spacing:0.01em;
+  }
+  .positioning .p-services{
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin:0 0 14px;
+  }
+  .positioning .p-audience{
+    font-size:14.5px;
+    color:var(--grey);
+    font-weight:500;
+    margin:0 0 10px;
+  }
+  .positioning .p-scope{
+    display:inline-block;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--black);
+    background:var(--yellow);
+    border:1.5px solid var(--black);
+    border-radius:999px;
+    padding:5px 14px;
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    overflow:hidden;
+    padding:16px 0;
+    white-space:nowrap;
+  }
+  .marquee-track{
+    display:inline-block;
+    animation: scroll 32s linear infinite;
+  }
+  .marquee span{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-weight:700;
+    color:var(--grey);
+    padding:0 18px;
+  }
+  .marquee span.accent{color:var(--black);}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+  }
+
+  /* ---------- ACCEPTANCE BLOCK ---------- */
+  .acceptance-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:64px 32px 0;
+  }
+  .acceptance{
+    background:var(--yellow);
+    border-radius:20px;
+    padding:40px 44px;
+    display:flex;
+    gap:32px;
+    align-items:flex-start;
+  }
+  .acceptance .mark{
+    font-size:34px;
+    font-weight:900;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .acceptance p{
+    margin:0;
+    font-size:18px;
+    font-weight:600;
+    max-width:760px;
+    line-height:1.45;
+  }
+  .acceptance p .name{
+    font-family:Georgia, serif;
+    font-style:italic;
+    font-weight:400;
+  }
+
+  /* ---------- LAYOUT: TOC + CLAUSES ---------- */
+  .content-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:96px 32px 40px;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .toc{
+    position:sticky;
+    top:110px;
+  }
+  .toc .eyebrow{margin-bottom:18px;}
+  .toc ol{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .toc li a{
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    color:var(--grey);
+    padding:9px 0;
+    border-bottom:1px solid var(--rule);
+    transition:color .2s ease, padding-left .2s ease;
+  }
+  .toc li a .n{
+    font-weight:800;
+    color:var(--black);
+    opacity:0.4;
+    font-size:12px;
+  }
+  .toc li a:hover{color:var(--black);padding-left:4px;}
+
+  @media (max-width:880px){
+    .content-wrap{grid-template-columns:1fr;}
+    .toc{position:static;display:none;}
+  }
+
+  .clauses{
+    display:flex;
+    flex-direction:column;
+  }
+  .clause{
+    padding:44px 0;
+    border-bottom:1px solid var(--rule);
+    scroll-margin-top:120px;
+  }
+  .clause:first-child{padding-top:0;}
+  .clause-head{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    margin-bottom:16px;
+  }
+  .clause-num{
+    font-size:14px;
+    font-weight:900;
+    color:var(--black);
+    background:var(--yellow);
+    border-radius:999px;
+    width:34px;
+    height:34px;
+    min-width:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .clause h2{
+    font-size:22px;
+    font-weight:800;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .clause .body{
+    margin-left:52px;
+    color:var(--black);
+    font-size:15.5px;
+    font-weight:500;
+    max-width:760px;
+  }
+  .clause .body p{margin:0 0 12px;}
+  .clause .body p:last-child{margin-bottom:0;}
+  .clause .body .callout{
+    display:inline;
+    background:linear-gradient(to top, var(--yellow) 42%, transparent 42%);
+    font-weight:700;
+  }
+  .clause .body strong{font-weight:800;}
+  .clause .body .cost{
+    font-family:Georgia, serif;
+    font-style:italic;
+  }
+
+  .bold-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--black);
+    color:var(--cream);
+    text-decoration:none;
+    font-weight:800;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    padding:11px 20px;
+    border-radius:999px;
+    margin:4px 0 16px;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .bold-btn:hover{background:#000; transform:translateY(-2px);}
+  .bold-arrow{font-size:13px;}
+
+  .alt-payments{
+    background:var(--yellow);
+    border:1.5px solid var(--black);
+    border-radius:14px;
+    padding:14px 18px;
+    margin:0 0 16px;
+    max-width:420px;
+  }
+  .alt-payments .eyebrow{margin-bottom:4px;}
+  .alt-payments p:not(.eyebrow){
+    margin:0;
+    font-size:14px;
+    font-weight:600;
+  }
+  .alt-payments .number-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .copy-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--black);
+    color:var(--cream);
+    border:none;
+    border-radius:999px;
+    padding:6px 12px;
+    font-family:'Archivo', sans-serif;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .copy-btn:hover{transform:translateY(-1px);}
+  .copy-btn svg{
+    width:12px;
+    height:12px;
+    flex-shrink:0;
+  }
+  .copy-btn.copied{background:#5B7A4B;}
+
+  @media (max-width:640px){
+    .clause .body{margin-left:0;margin-top:6px;}
+    .clause-head{gap:12px;}
+  }
+
+  /* ---------- SIGNATURE CTA ---------- */
+  .sign-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:40px 32px 0;
+  }
+  .signature{
+    background:var(--black);
+    color:var(--cream);
+    border-radius:20px;
+    padding:64px 48px;
+    text-align:center;
+    margin-top:16px;
+  }
+  .signature .eyebrow{color:var(--yellow);margin-bottom:20px;}
+  .signature h2{
+    font-size:clamp(28px,4vw,44px);
+    font-weight:900;
+    margin:0 0 16px;
+    letter-spacing:-0.01em;
+  }
+  .signature h2 .editorial{color:var(--yellow);}
+  .signature p{
+    color:rgba(238,239,233,0.72);
+    font-size:15px;
+    max-width:460px;
+    margin:0 auto 32px;
+  }
+  .btn-yellow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--yellow);
+    color:var(--black);
+    text-decoration:none;
+    font-weight:800;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    padding:16px 30px;
+    border-radius:999px;
+    transition:transform .2s ease;
+  }
+  .btn-yellow:hover{transform:translateY(-2px);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:64px 32px 48px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+  footer .logo{font-size:16px;}
+  footer .fine{
+    font-size:13px;
+    color:var(--grey);
+  }
+  footer a.ig{
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    color:var(--black);
+  }
+
+  .back-to-top{
+    position:fixed;
+    bottom:28px;
+    right:28px;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:var(--black);
+    color:var(--cream);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:100;
+    box-shadow:0 8px 20px rgba(32,32,32,0.22);
+    opacity:0;
+    transform:translateY(12px);
+    pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease, background .2s ease, color .2s ease;
+  }
+  .back-to-top.show{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+  .back-to-top:hover{
+    background:var(--yellow);
+    color:var(--black);
+  }
+  .back-to-top svg{
+    width:20px;
+    height:20px;
+    pointer-events:none;
+  }
+
+  @media (max-width:640px){
+    .back-to-top{
+      bottom:20px;
+      right:20px;
+      width:46px;
+      height:46px;
+    }
+  }
+</style>
 </head>
 <body>
 
 <header>
   <div class="nav-inner">
-    <a class="logo" href="#top">YELLOWER®</a>
+    <a class="logo" href="/">YELLOWER®</a>
     <nav class="nav-links">
       <a href="https://yellowerdesignstudio.com/">Volver al sitio ↗</a>
       <a href="#terminos">Términos</a>
@@ -47,6 +573,13 @@
         <p class="eyebrow">Vigencia</p>
         <p>Desde la fecha de aceptación del pago inicial</p>
       </div>
+    </div>
+
+    <div class="positioning">
+      <p class="p-tagline">✦ Marcas con intención ✦</p>
+      <p class="p-services">Branding · Social Media · Diseño Web</p>
+      <p class="p-audience">Para empresas, emprendimientos y marcas personales 🤍</p>
+      <span class="p-scope">LATAM + Worldwide</span>
     </div>
   </section>
 
@@ -123,6 +656,23 @@
         <div class="clause-head"><span class="clause-num">06</span><h2>Pagos y planes mensuales</h2></div>
         <div class="body">
           <p>Los servicios se pagan para iniciar. <span class="callout">No se entregarán archivos finales ni se publicará contenido si existen pagos pendientes.</span> Los pagos pueden realizarse mediante enlace de pago, transferencia bancaria o tarjeta débito o crédito.</p>
+
+          <a class="bold-btn" href="https://checkout.bold.co/payment/LNK_QBI7F5ZOXX" target="_blank" rel="noopener">
+            <span>Pagar con BOLD</span>
+            <span class="bold-arrow">↗</span>
+          </a>
+
+          <div class="alt-payments">
+            <p class="eyebrow">También aceptamos</p>
+            <div class="number-row">
+              <p>Nequi, Daviplata o Bre-B al número <strong>313 455 3455</strong></p>
+              <button type="button" class="copy-btn" data-copy="3134553455" aria-label="Copiar número">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2"/></svg>
+                <span class="copy-label">Copiar</span>
+              </button>
+            </div>
+          </div>
+
           <p>En servicios bajo modalidad de plan o suscripción mensual, la cancelación debe notificarse con <strong>mínimo 15 días de anticipación</strong> al siguiente período de servicio.</p>
         </div>
       </article>
@@ -130,7 +680,7 @@
       <article class="clause" id="c7">
         <div class="clause-head"><span class="clause-num">07</span><h2>Comunicación</h2></div>
         <div class="body">
-          <p>Los canales oficiales de comunicación son <strong>Google Meet, correo electrónico y WhatsApp</strong>. Las reuniones deben agendarse previamente mediante Google Calendar.</p>
+          <p>Los canales oficiales de comunicación son <strong>Google Meet, correo electrónico y <a href="https://wa.me/573134553455" target="_blank" rel="noopener" style="text-decoration:underline;">WhatsApp</a></strong>. Las reuniones deben agendarse previamente mediante <a href="https://calendar.app.google/DcmWvT41UvfwSJD48" target="_blank" rel="noopener" style="text-decoration:underline;">Google Calendar</a>.</p>
         </div>
       </article>
 
@@ -177,6 +727,68 @@
   </footer>
 
 </main>
-<script src="../js/script.js"></script>
+
+<button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M12 5L6 11M12 5L18 11" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+  (function(){
+    const btn = document.getElementById('backToTop');
+
+    function toggleVisibility(){
+      if(window.scrollY > 400){
+        btn.classList.add('show');
+      } else {
+        btn.classList.remove('show');
+      }
+    }
+
+    window.addEventListener('scroll', toggleVisibility, { passive:true });
+    toggleVisibility();
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  })();
+
+  // ---------- COPY PAYMENT NUMBER ----------
+  (function(){
+    const copyBtn = document.querySelector('.copy-btn');
+    if(!copyBtn) return;
+    const label = copyBtn.querySelector('.copy-label');
+    const originalText = label.textContent;
+    const value = copyBtn.dataset.copy;
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          await navigator.clipboard.writeText(value);
+        } else {
+          const temp = document.createElement('textarea');
+          temp.value = value;
+          temp.style.position = 'fixed';
+          temp.style.opacity = '0';
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+        }
+        copyBtn.classList.add('copied');
+        label.textContent = 'Copiado ✓';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          label.textContent = originalText;
+        }, 1800);
+      } catch(err){
+        label.textContent = 'Error';
+        setTimeout(() => { label.textContent = originalText; }, 1800);
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
