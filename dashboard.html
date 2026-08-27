@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Analíticas — Yellower Design Studio®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+<!-- Importar Chart.js para los gráficos dinámicos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+  :root{
+    --cream:#EEEFE9;
+    --black:#202020;
+    --yellow:#FFD45F;
+    --yellow-deep:#F2B93E;
+    --grey:#6B6B63;
+    --rule: rgba(32,32,32,0.14);
+    --green: #4CAF50;
+    --red: #F44336;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--black);
+    font-family:'Archivo', sans-serif;
+    font-weight:500;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit; text-decoration: none;}
+  
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:80;
+    background:rgba(238,239,233,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-weight:900;
+    letter-spacing:0.04em;
+    font-size:16px;
+  }
+  .logo span { color: var(--grey); font-weight: 500; }
+  .btn-back {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    background: var(--black);
+    color: var(--cream);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: transform .2s ease;
+  }
+  .btn-back:hover { transform: translateY(-2px); }
+
+  @media (min-width: 768px) {
+    .nav-inner { padding: 20px 32px; }
+    .logo { font-size: 18px; }
+    .btn-back { font-size: 13px; padding: 10px 18px; }
+  }
+
+  /* ---------- LAYOUT DASHBOARD ---------- */
+  .dashboard-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+  .dash-header {
+    margin-bottom: 24px;
+  }
+  .dash-header h1 {
+    font-size: clamp(24px, 5vw, 32px);
+    font-weight: 900;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .dash-header p {
+    color: var(--grey);
+    font-size: 14px;
+    margin: 0;
+  }
+
+  /* ---------- KPIs (Tarjetas Superiores) ---------- */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: var(--cream);
+    border: 2px solid var(--black);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; width: 40px; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,212,95,0.15));
+    pointer-events: none;
+  }
+  .kpi-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--grey);
+    margin-bottom: 8px;
+  }
+  .kpi-value {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .kpi-trend {
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .trend-up { color: var(--green); }
+  .trend-down { color: var(--red); }
+
+  @media (min-width: 640px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* ---------- CHARTS GRID ---------- */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .chart-card {
+    background: var(--cream);
+    border: 2px solid var(--black);
+    border-radius: 20px;
+    padding: 24px 20px;
+  }
+  .chart-card h3 {
+    font-size: 16px;
+    font-weight: 900;
+    margin: 0 0 20px;
+    letter-spacing: -0.01em;
+  }
+  .canvas-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+  }
+
+  /* Especificidades de grilla para pantallas grandes */
+  @media (min-width: 900px) {
+    .charts-grid {
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas: 
+        "main main"
+        "bar pie"
+        "sources sources";
+    }
+    .chart-card.col-main { grid-area: main; }
+    .chart-card.col-bar { grid-area: bar; }
+    .chart-card.col-pie { grid-area: pie; }
+    .chart-card.col-sources { grid-area: sources; }
+    
+    .chart-card.col-main .canvas-container { height: 350px; }
+  }
+
+  /* ---------- TABLA DE FUENTES ---------- */
+  .sources-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sources-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+  }
+  .sources-list li:last-child {
+    border-bottom: none;
+  }
+  .sources-list .source-name {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sources-list .source-name span {
+    font-size: 16px;
+  }
+  .sources-list .source-stats {
+    color: var(--grey);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">YELLOWER® <span>/ Dashboard</span></a>
+    <a class="btn-back" href="index.html">← Volver</a>
+  </div>
+</header>
+
+<main class="dashboard-container">
+  
+  <div class="dash-header">
+    <h1>Resumen de Rendimiento</h1>
+    <p>Datos correspondientes a los últimos 30 días (Modo Prueba)</p>
+  </div>
+
+  <!-- TARJETAS DE KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-title">Visitas Totales</div>
+      <div class="kpi-value">12,450</div>
+      <div class="kpi-trend trend-up">▲ 14.5% vs mes anterior</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Usuarios Únicos</div>
+      <div class="kpi-value">8,920</div>
+      <div class="kpi-trend trend-up">▲ 8.2% vs mes anterior</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Tiempo Promedio</div>
+      <div class="kpi-value">2m 45s</div>
+      <div class="kpi-trend trend-up">▲ 12s vs mes anterior</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-title">Tasa de Rebote</div>
+      <div class="kpi-value">42.3%</div>
+      <div class="kpi-trend trend-down">▼ 2.1% (Mejora)</div>
+    </div>
+  </div>
+
+  <!-- GRÁFICOS -->
+  <div class="charts-grid">
+    
+    <!-- Gráfico principal: Líneas -->
+    <div class="chart-card col-main">
+      <h3>Evolución de Visitas (Últimos 14 días)</h3>
+      <div class="canvas-container">
+        <canvas id="trafficChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Gráfico 2: Barras -->
+    <div class="chart-card col-bar">
+      <h3>Top 5 Países</h3>
+      <div class="canvas-container">
+        <canvas id="locationChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Gráfico 3: Dona -->
+    <div class="chart-card col-pie">
+      <h3>Dispositivos</h3>
+      <div class="canvas-container">
+        <canvas id="deviceChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Tabla: Fuentes de tráfico -->
+    <div class="chart-card col-sources">
+      <h3>Principales Fuentes de Tráfico</h3>
+      <ul class="sources-list">
+        <li>
+          <div class="source-name"><span>🔍</span> Búsqueda Orgánica (Google)</div>
+          <div class="source-stats">45% (5,602 visitas)</div>
+        </li>
+        <li>
+          <div class="source-name"><span>📱</span> Instagram (@yellower.co)</div>
+          <div class="source-stats">30% (3,735 visitas)</div>
+        </li>
+        <li>
+          <div class="source-name"><span>🔗</span> Tráfico Directo</div>
+          <div class="source-stats">15% (1,867 visitas)</div>
+        </li>
+        <li>
+          <div class="source-name"><span>💬</span> WhatsApp</div>
+          <div class="source-stats">10% (1,246 visitas)</div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  // Configuración global de Chart.js para que coincida con el diseño de Yellower
+  Chart.defaults.font.family = "'Archivo', sans-serif";
+  Chart.defaults.color = '#6B6B63';
+  Chart.defaults.scale.grid.color = 'rgba(32,32,32,0.05)';
+  
+  const blackColor = '#202020';
+  const yellowColor = '#FFD45F';
+  const creamColor = '#EEEFE9';
+
+  // 1. Gráfico de Evolución de Visitas (Líneas)
+  const ctxTraffic = document.getElementById('trafficChart').getContext('2d');
+  new Chart(ctxTraffic, {
+    type: 'line',
+    data: {
+      labels: ['Día 1', 'Día 2', 'Día 3', 'Día 4', 'Día 5', 'Día 6', 'Día 7', 'Día 8', 'Día 9', 'Día 10', 'Día 11', 'Día 12', 'Día 13', 'Hoy'],
+      datasets: [{
+        label: 'Visitas',
+        data: [450, 480, 420, 510, 600, 550, 590, 620, 680, 650, 710, 780, 800, 850],
+        borderColor: blackColor,
+        backgroundColor: 'rgba(255, 212, 95, 0.2)', // Amarillo transparente
+        borderWidth: 3,
+        pointBackgroundColor: yellowColor,
+        pointBorderColor: blackColor,
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        fill: true,
+        tension: 0.4 // Hace la curva suave
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: blackColor,
+          titleFont: { size: 13, family: 'Archivo' },
+          bodyFont: { size: 14, weight: 'bold', family: 'Archivo' },
+          padding: 10,
+          cornerRadius: 8,
+          displayColors: false
+        }
+      },
+      scales: {
+        y: { beginAtZero: true, border: {display: false} },
+        x: { border: {display: false} }
+      }
+    }
+  });
+
+  // 2. Gráfico de Ubicación (Barras Horizontales)
+  const ctxLocation = document.getElementById('locationChart').getContext('2d');
+  new Chart(ctxLocation, {
+    type: 'bar',
+    data: {
+      labels: ['Colombia', 'México', 'Argentina', 'España', 'EE.UU.'],
+      datasets: [{
+        label: 'Visitas',
+        data: [4200, 2800, 1900, 1500, 950],
+        backgroundColor: [blackColor, blackColor, blackColor, blackColor, yellowColor],
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y', // Lo hace horizontal
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: { display: false }, // Oculta el eje X inferior
+        y: { border: {display: false}, grid: {display: false} }
+      }
+    }
+  });
+
+  // 3. Gráfico de Dispositivos (Doughnut)
+  const ctxDevice = document.getElementById('deviceChart').getContext('2d');
+  new Chart(ctxDevice, {
+    type: 'doughnut',
+    data: {
+      labels: ['Móvil', 'Escritorio', 'Tablet'],
+      datasets: [{
+        data: [65, 30, 5],
+        backgroundColor: [yellowColor, blackColor, creamColor],
+        borderColor: blackColor,
+        borderWidth: 2,
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '70%', // Grosor de la dona
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font: { family: 'Archivo', weight: 'bold' }, color: blackColor, padding: 20 }
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
