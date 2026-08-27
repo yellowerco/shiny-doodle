@@ -534,7 +534,7 @@
   <section class="picker-section">
     <p class="eyebrow picker-eyebrow">✳ Elige tu necesidad</p>
     <h2>¿Qué necesitas automatizar hoy?</h2>
-    <p class="picker-sub">Elige la frase que más se parezca a lo tuyo — puedes cambiar de opción cuando quieras.</p>
+    <p class="picker-sub">Elige las opciones que necesites — puedes marcar varias o dejar que rotren solas.</p>
 
     <div class="needs-grid" id="needsGrid">
       <!-- chips injected by JS -->
@@ -715,65 +715,129 @@
   const needsGrid = document.getElementById('needsGrid');
   const panelInner = document.getElementById('panelInner');
 
-  function renderChips(activeIndex){
+  let selectedIndices = []; // Almacena múltiples índices seleccionados
+  let currentIndex = 0;     // Índice actual para cuando rota automáticamente
+  let autoTimer = null;     // Referencia del temporizador automático
+
+  function renderChips(){
     needsGrid.innerHTML = '';
     needs.forEach((need, i) => {
       const chip = document.createElement('button');
+      const isActive = selectedIndices.includes(i);
       chip.type = 'button';
-      chip.className = 'need-chip' + (i === activeIndex ? ' active' : '');
+      chip.className = 'need-chip' + (isActive ? ' active' : '');
       chip.innerHTML = `<span class="n-icon">${need.icon}</span><span>${need.chip}</span><span class="n-check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
-      chip.addEventListener('click', () => selectNeed(i));
+      chip.addEventListener('click', () => toggleNeed(i));
       needsGrid.appendChild(chip);
     });
-    const activeChip = needsGrid.children[activeIndex];
-    if(activeChip){
-      activeChip.classList.add('pop');
-      activeChip.addEventListener('animationend', () => activeChip.classList.remove('pop'), { once:true });
-    }
   }
 
-  function renderPanel(index){
-    const need = needs[index];
+  function renderPanel(){
     panelInner.classList.remove('show');
 
     setTimeout(() => {
-      panelInner.innerHTML = `
-        <p class="panel-answer">Elegiste: <strong>“${need.chip}”</strong></p>
-        <span class="panel-icon">${need.icon}</span>
-        <p class="panel-tag">${need.tag}</p>
-        <h3>${need.title}</h3>
-        <p class="panel-desc">${need.desc}</p>
-        <ul class="panel-bullets">
-          ${need.bullets.map(b => `<li><span class="check">✓</span>${b}</li>`).join('')}
-        </ul>
-        <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${need.wa}">Cuéntanos tu caso ↗</a>
-      `;
+      if(selectedIndices.length === 0){
+        // MODO AUTOMÁTICO (Muestra la tarjeta según currentIndex)
+        const need = needs[currentIndex];
+        panelInner.innerHTML = `
+          <p class="panel-answer">Mostrando sugerencia: <strong>“${need.chip}”</strong></p>
+          <span class="panel-icon">${need.icon}</span>
+          <p class="panel-tag">${need.tag}</p>
+          <h3>${need.title}</h3>
+          <p class="panel-desc">${need.desc}</p>
+          <ul class="panel-bullets">
+            ${need.bullets.map(b => `<li><span class="check">✓</span>${b}</li>`).join('')}
+          </ul>
+          <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${need.wa}">Cuéntanos tu caso ↗</a>
+        `;
+      } else {
+        // MODO MULTISELECCIÓN (Muestra un resumen o las tarjetas seleccionadas)
+        const selectedNeeds = selectedIndices.map(i => needs[i]);
+        const titlesHtml = selectedNeeds.map(n => `• ${n.title}`).join('<br>');
+        const combinedWaText = encodeURIComponent('Hola Yellower, me interesan los siguientes servicios de automatización:\n' + selectedNeeds.map(n => `- ${n.title}`).join('\n'));
+
+        panelInner.innerHTML = `
+          <p class="panel-answer">Has seleccionado <strong>${selectedIndices.length} necesidad${selectedIndices.length > 1 ? 'es' : ''}</strong></p>
+          <span class="panel-icon">✨</span>
+          <p class="panel-tag">Solución Combinada</p>
+          <h3>Automatización a la medida</h3>
+          <p class="panel-desc">Has seleccionado múltiples áreas clave para potenciar tu negocio:</p>
+          <div style="font-size: 14.5px; font-weight: 700; margin-bottom: 24px; line-height: 1.6; color: var(--black);">
+            ${titlesHtml}
+          </div>
+          <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${combinedWaText}">Cotizar selección ↗</a>
+        `;
+      }
       requestAnimationFrame(() => panelInner.classList.add('show'));
     }, 180);
   }
 
-  let currentIndex = 0;
+  function toggleNeed(index){
+    // Detener rotación automática al interactuar
+    stopAutoPlay();
 
-  function selectNeed(index){
-    currentIndex = index;
-    renderChips(index);
-    renderPanel(index);
+    const pos = selectedIndices.indexOf(index);
+    if(pos > -1){
+      selectedIndices.splice(pos, 1);
+    } else {
+      selectedIndices.push(index);
+    }
+
+    renderChips();
+    renderPanel();
+
+    // Si el usuario deseleccionó todo, reiniciar el autoplay después de un momento
+    if(selectedIndices.length === 0){
+      startAutoPlay();
+    }
+  }
+
+  function startAutoPlay(){
+    stopAutoPlay();
+    autoTimer = setInterval(() => {
+      if(selectedIndices.length === 0){
+        currentIndex = (currentIndex + 1) % needs.length;
+        renderPanel();
+      }
+    }, 3500); // 3.5 segundos exactos
+  }
+
+  function stopAutoPlay(){
+    if(autoTimer){
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
   }
 
   const panelPrevBtn = document.getElementById('panelPrevBtn');
   const panelNextBtn = document.getElementById('panelNextBtn');
 
   panelPrevBtn.addEventListener('click', () => {
-    const prev = (currentIndex - 1 + needs.length) % needs.length;
-    selectNeed(prev);
+    stopAutoPlay();
+    currentIndex = (currentIndex - 1 + needs.length) % needs.length;
+    if(selectedIndices.length > 0) {
+      selectedIndices = [currentIndex];
+      renderChips();
+    }
+    renderPanel();
+    if(selectedIndices.length === 0) startAutoPlay();
   });
 
   panelNextBtn.addEventListener('click', () => {
-    const next = (currentIndex + 1) % needs.length;
-    selectNeed(next);
+    stopAutoPlay();
+    currentIndex = (currentIndex + 1) % needs.length;
+    if(selectedIndices.length > 0) {
+      selectedIndices = [currentIndex];
+      renderChips();
+    }
+    renderPanel();
+    if(selectedIndices.length === 0) startAutoPlay();
   });
 
-  selectNeed(0);
+  // Inicialización
+  renderChips();
+  renderPanel();
+  startAutoPlay();
 })();
 </script>
 
