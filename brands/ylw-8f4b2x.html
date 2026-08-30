@@ -32,14 +32,12 @@
     if(!autorizado){
       window.location.replace("./");
     } else {
-      // Solo si el token es válido, se permite pintar la página.
       document.documentElement.style.visibility = "visible";
     }
   })();
 </script>
 <style>
-  /* Oculto por defecto: si el script de arriba no autoriza, esto nunca se ve. */
-  html{ visibility: hidden; }
+  html{ visibility: hidden; } /* si el script de arriba no autoriza, esto nunca se ve */
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,10 +46,10 @@
 
 <style>
   :root{
-    --bg: #FEFDFA;      /* fondo general — más limpio y moderno */
-    --cream: #EEEFE9;   /* color de marca, superficies internas */
+    --bg: #FEFDFA;
+    --cream: #EEEFE9;
     --black: #202020;
-    --yellow: #FFD55F;
+    --yellow: #FFD45F;
     --grey: #6B6B63;
     --blue: #1691EF;
 
@@ -72,125 +70,212 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Puntos decorativos ✦ flotantes de fondo — detalle premium sutil */
-  .deco-star{
-    position: fixed;
-    color: rgba(32,32,32,0.05);
-    font-size: 8rem;
-    pointer-events: none;
-    z-index: 0;
-    user-select: none;
-  }
-  .deco-star.s1{ top: -30px; right: 4vw; }
-  .deco-star.s2{ bottom: 10%; left: -40px; font-size: 11rem; }
+  a{ color: inherit; }
 
-  header.vault-top{
-    position: relative;
-    z-index: 1;
-    padding: 40px 6vw 32px;
-    border-bottom: var(--line);
+  /* ============ LAYOUT: SIDEBAR + CONTENIDO (ref. Brandfetch) ============ */
+  .vault-layout{
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    align-items: start;
   }
+
+  /* ------------ SIDEBAR ------------ */
+  aside.brand-sidebar{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: var(--line);
+    background: #fff;
+  }
+
   .back-link{
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 6px;
     text-decoration: none;
     color: var(--grey);
     font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 22px;
+    font-size: 0.82rem;
+    padding: 18px 22px 0;
   }
   .back-link:hover{ color: var(--black); }
 
-  .vault-title-row{
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .vault-title-row .star{ color: var(--blue); font-size: 1.8rem; }
-  h1.vault-title{
-    margin: 0;
-    font-size: clamp(2.1rem, 5vw, 3.3rem);
-    font-weight: 800;
-  }
-  p.vault-sub{
-    font-family: var(--font-editorial);
-    font-style: italic;
-    color: var(--grey);
-    max-width: 50ch;
-    margin: 14px 0 0;
-  }
-
-  section{
-    position: relative;
-    z-index: 1;
-    padding: 60px 6vw;
-    border-bottom: var(--line);
-  }
-  section:last-of-type{ border-bottom: none; }
-
-  .section-head{ margin-bottom: 30px; }
-  .section-eyebrow{
-    font-family: var(--font-editorial);
-    font-style: italic;
-    color: var(--grey);
-    font-size: 0.95rem;
-    margin: 0 0 4px;
-  }
-  h2.section-title{
-    margin: 0;
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
-    font-weight: 800;
-  }
-
-  /* ============ DESCARGAS: LOGOS Y TIPOGRAFÍAS ============ */
-  .download-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-  }
-  .download-card{
-    background: var(--cream);
-    border: var(--line);
+  .sidebar-cover{
+    margin: 14px 22px 0;
+    height: 120px;
     border-radius: 18px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    box-shadow: var(--shadow-soft);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
   }
-  .download-card:hover{ box-shadow: var(--shadow-hover); transform: translateY(-2px); }
-  .download-card .file-preview{
-    height: 100px;
-    border-radius: 12px;
+  .sidebar-cover .cover-star{
+    position: absolute;
+    color: rgba(255,255,255,0.08);
+    font-size: 5rem;
+    top: -14px;
+    right: -6px;
+  }
+
+  .sidebar-logo{
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
     background: #fff;
+    border: 4px solid #fff;
+    box-shadow: var(--shadow-soft);
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: -42px 0 0 22px;
+    position: relative;
     overflow: hidden;
-    border: var(--line);
   }
-  .download-card .file-preview img{ max-height: 70%; max-width: 80%; object-fit: contain; }
-  .download-card .file-name{ font-weight: 700; font-size: 1rem; }
-  .download-card .file-meta{ color: var(--grey); font-size: 0.82rem; margin-top: -8px; }
-  .download-card a.dl-btn{
+  .sidebar-logo img{ max-width: 62%; max-height: 62%; object-fit: contain; }
+
+  .sidebar-body{ padding: 16px 22px 30px; }
+
+  h1.brand-name{
+    margin: 0 0 8px;
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  .brand-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  .brand-desc{
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--black);
+    margin: 0 0 20px;
+  }
+
+  .brand-meta-link{
+    display: flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
-    text-align: center;
-    background: var(--black);
-    color: #fff;
     font-weight: 600;
-    font-size: 0.85rem;
-    padding: 11px;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+  }
+  .brand-meta-link svg{ flex-shrink: 0; }
+  .brand-meta-link:hover{ color: var(--blue); }
+
+  .social-row{
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .social-row a{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .social-row a:hover{ background: var(--yellow); }
+
+  /* ------------ CONTENIDO PRINCIPAL ------------ */
+  main.vault-main{ padding: 34px clamp(20px, 4vw, 56px) 90px; }
+
+  .content-section{ margin-bottom: 64px; }
+
+  .section-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  h2.section-title{
+    margin: 0;
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+    font-weight: 800;
+  }
+
+  .btn-download-all{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-download-all:hover{ background: var(--black); }
+
+  /* ============ GRID DE LOGOS / TIPOGRAFÍAS ============ */
+  .asset-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+  }
+  .asset-card{
+    background: var(--cream);
+    border-radius: 18px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .asset-card:hover{ box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+
+  .asset-card a.asset-visual{
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: var(--cream);
+  }
+  .asset-card.on-dark a.asset-visual{ background: var(--black); }
+  .asset-card a.asset-visual img{ max-width: 55%; max-height: 55%; object-fit: contain; }
+  .asset-card .type-preview{ font-weight: 800; font-size: 2.2rem; color: var(--black); }
+
+  .asset-card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+  .asset-card-footer .format-tag{
+    background: var(--cream);
+    color: var(--grey);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
     border-radius: 999px;
   }
-  .download-card a.dl-btn:hover{ background: var(--blue); }
 
   /* ============ CAJA TIPOGRÁFICA ============ */
   .type-specimen{
     background: var(--cream);
-    border: var(--line);
     border-radius: 22px;
     padding: 40px clamp(20px, 4vw, 48px);
     box-shadow: var(--shadow-soft);
@@ -208,21 +293,9 @@
     color: var(--grey);
     letter-spacing: 0.06em;
   }
-  .type-specimen hr{
-    border: none;
-    border-top: var(--line);
-    margin: 26px 0;
-  }
-  .type-specimen .lorem{
-    font-size: 1.05rem;
-    line-height: 1.65;
-    max-width: 68ch;
-  }
-  .type-specimen .lorem .accent{
-    font-family: var(--font-editorial);
-    font-style: italic;
-    color: var(--blue);
-  }
+  .type-specimen hr{ border: none; border-top: var(--line); margin: 26px 0; }
+  .type-specimen .lorem{ font-size: 1.05rem; line-height: 1.65; max-width: 68ch; }
+  .type-specimen .lorem .accent{ font-family: var(--font-editorial); font-style: italic; color: var(--blue); }
   .type-label{
     font-family: var(--font-editorial);
     font-style: italic;
@@ -231,63 +304,71 @@
     margin: 0 0 8px;
   }
 
-  /* ============ PALETA DE COLOR — dividida por tarjetas ============
-     Cada color es su propia tarjeta: swatch arriba, valores siempre
-     visibles abajo (sin depender de hover). Más clara para leer y
-     para copiar en móvil. */
-  .palette-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
-  }
-  .color-card{
-    border: var(--line);
+  /* ============ TABLA DE PALETA DE COLOR (ref. Brandfetch) ============ */
+  .colors-table-wrap{
     border-radius: 20px;
     overflow: hidden;
-    background: #fff;
     box-shadow: var(--shadow-soft);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
-  .color-card:hover{ box-shadow: var(--shadow-hover); transform: translateY(-2px); }
-
-  .color-card .swatch{
-    height: 110px;
+  table.colors-table{
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
   }
-
-  .color-card .info{
-    padding: 18px 16px 20px;
-  }
-  .color-card .color-name{
-    font-weight: 800;
-    font-size: 1.02rem;
-    margin-bottom: 12px;
-  }
-
-  .color-value{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    font-weight: 600;
+  .colors-table thead th{
+    text-align: left;
+    font-size: 0.78rem;
+    text-transform: none;
+    color: var(--grey);
+    font-weight: 700;
+    padding: 16px 18px;
     background: var(--cream);
-    border-radius: 8px;
-    padding: 8px 10px;
-    margin-bottom: 6px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: border-color 0.15s ease, background 0.15s ease;
+    border-bottom: var(--line);
   }
-  .color-value:last-child{ margin-bottom: 0; }
-  .color-value:hover{ border-color: rgba(32,32,32,0.18); background: #fff; }
-  .color-value .copy-hint{ font-size: 0.68rem; color: var(--grey); }
-  .color-value.just-copied{ background: var(--yellow); border-color: var(--yellow); }
+  .colors-table tbody td{
+    padding: 14px 18px;
+    border-bottom: var(--line);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .colors-table tbody tr:last-child td{ border-bottom: none; }
+
+  .hex-chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.88rem;
+    font-family: var(--font-display);
+    cursor: pointer;
+  }
+  .hex-chip svg{ opacity: 0.75; flex-shrink: 0; }
+
+  .copy-cell{
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: none;
+    border: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--black);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .copy-cell svg{ color: var(--grey); flex-shrink: 0; }
+  .copy-cell:hover svg{ color: var(--blue); }
 
   .palette-note{
     font-family: var(--font-editorial);
     font-style: italic;
     color: var(--grey);
     font-size: 0.82rem;
-    margin-top: 18px;
+    margin-top: 14px;
   }
 
   /* Toast de "copiado" */
@@ -309,206 +390,250 @@
   }
   #copyToast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  footer.vault-footer{
-    position: relative; z-index: 1;
-    padding: 30px 6vw;
-    text-align: center;
-    color: var(--grey);
-    font-size: 0.85rem;
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px){
+    .vault-layout{ grid-template-columns: 1fr; }
+    aside.brand-sidebar{ position: relative; height: auto; border-right: none; border-bottom: var(--line); }
+    .colors-table thead th:nth-child(4),
+    .colors-table tbody td:nth-child(4){ display: none; } /* CMYK se oculta en pantallas chicas para que la tabla respire */
+  }
+  @media (max-width: 560px){
+    .colors-table thead th:nth-child(5),
+    .colors-table tbody td:nth-child(5){ display: none; } /* PANTONE también se oculta en móvil muy angosto */
   }
 
   @media (prefers-reduced-motion: reduce){
-    .color-card, .download-card{ transition: none; }
+    .asset-card{ transition: none; }
   }
 </style>
 </head>
 <body>
+<div class="vault-layout">
 
-<!-- Decoración de fondo, puramente estética -->
-<div class="deco-star s1">✦</div>
-<div class="deco-star s2">✦</div>
+  <!-- ============ SIDEBAR — tarjeta de marca ============ -->
+  <aside class="brand-sidebar">
+    <a class="back-link" href="../brands.html">← Volver al catálogo</a>
 
-<header class="vault-top">
-  <a class="back-link" href="./">← Volver al catálogo</a>
-  <div class="vault-title-row">
-    <span class="star">✦</span>
-    <h1 class="vault-title">Yellower Design Studio</h1>
-    <!-- INSERTA AQUÍ el nombre real de la marca al duplicar esta plantilla -->
-  </div>
-  <p class="vault-sub">Todo el sistema visual de la marca: logos, tipografía y paleta de color, listos para descargar y usar con intención.</p>
-</header>
-
-<!-- ============ SECCIÓN 1: DESCARGAS DE LOGOS ============ -->
-<section id="logos">
-  <div class="section-head">
-    <p class="section-eyebrow">Archivos de marca</p>
-    <h2 class="section-title">Logos</h2>
-  </div>
-  <div class="download-grid">
-    <!-- INSERTA AQUÍ cada archivo de logo real. Duplica el bloque .download-card por cada uno -->
-    <div class="download-card">
-      <div class="file-preview"><img src="../assets/logos/yellower-icono.png" alt="Isotipo Yellower" onerror="this.style.display='none'"></div>
-      <div class="file-name">Isotipo — flor</div>
-      <div class="file-meta">PNG, fondo transparente</div>
-      <a class="dl-btn" href="../assets/logos/yellower-icono.png" download>Descargar</a>
+    <div class="sidebar-cover">
+      <span class="cover-star">✦</span>
+      <!-- INSERTA AQUÍ una imagen de portada real si la marca tiene una (ej. producto, campaña) -->
     </div>
-    <div class="download-card">
-      <div class="file-preview"><img src="../assets/logos/yellower-wordmark.svg" alt="Wordmark Yellower" onerror="this.style.display='none'"></div>
-      <div class="file-name">Wordmark completo</div>
-      <div class="file-meta">SVG, vectorial</div>
-      <a class="dl-btn" href="../assets/logos/yellower-wordmark.svg" download>Descargar</a>
+    <div class="sidebar-logo">
+      <img src="../assets/logos/yellower-icono.png" alt="Isotipo Yellower" onerror="this.style.display='none'">
     </div>
-    <div class="download-card">
-      <div class="file-preview"><img src="../assets/logos/yellower-negativo.png" alt="Logo negativo Yellower" onerror="this.style.display='none'"></div>
-      <div class="file-name">Versión negativa</div>
-      <div class="file-meta">PNG, fondo transparente</div>
-      <a class="dl-btn" href="../assets/logos/yellower-negativo.png" download>Descargar</a>
-    </div>
-    <div class="download-card">
-      <div class="file-preview"><img src="../assets/logos/yellower-full-kit-cover.png" alt="Kit completo de logos" onerror="this.style.display='none'"></div>
-      <div class="file-name">Kit completo (.zip)</div>
-      <div class="file-meta">PNG + SVG, todas las versiones</div>
-      <a class="dl-btn" href="../assets/logos/yellower-logo-kit.zip" download>Descargar todo</a>
-    </div>
-  </div>
-</section>
 
-<!-- ============ SECCIÓN 2: DESCARGAS DE TIPOGRAFÍAS ============ -->
-<section id="tipografias">
-  <div class="section-head">
-    <p class="section-eyebrow">Archivos de marca</p>
-    <h2 class="section-title">Tipografías</h2>
-  </div>
-  <div class="download-grid">
-    <!-- INSERTA AQUÍ los archivos de fuente reales (.ttf / .otf / .woff2) -->
-    <div class="download-card">
-      <div class="file-preview" style="font-weight:800; font-size:1.4rem;">Aa</div>
-      <div class="file-name">TT Norms Pro Variable</div>
-      <div class="file-meta">Tipografía principal — todos los pesos</div>
-      <a class="dl-btn" href="../assets/fonts/tt-norms-pro-variable.ttf" download>Descargar</a>
-    </div>
-    <div class="download-card">
-      <div class="file-preview" style="font-weight:600; font-size:1.4rem; font-style:italic; font-family: Georgia, serif;">Aa</div>
-      <div class="file-name">Georgia (acento editorial)</div>
-      <div class="file-meta">Fuente de sistema — itálica</div>
-      <a class="dl-btn" href="../assets/fonts/georgia-italic-info.pdf" download>Ver guía de uso</a>
-    </div>
-  </div>
-</section>
+    <div class="sidebar-body">
+      <h1 class="brand-name">Yellower Design Studio</h1>
+      <!-- INSERTA AQUÍ el nombre real de la marca al duplicar esta plantilla -->
 
-<!-- ============ SECCIÓN 3: CAJA TIPOGRÁFICA ============ -->
-<section id="especimen">
-  <div class="section-head">
-    <p class="section-eyebrow">Vista previa en vivo</p>
-    <h2 class="section-title">Cómo se ve la fuente</h2>
-  </div>
-  <div class="type-specimen">
-    <p class="type-label">Mayúsculas</p>
-    <p class="alphabet-block upper">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-    <p class="type-label">Minúsculas</p>
-    <p class="alphabet-block lower">abcdefghijklmnopqrstuvwxyz</p>
-    <p class="type-label">Números y símbolos soportados</p>
-    <p class="symbols-block">0123456789 · ¿? ¡! & % $ # @ + − = / ✦</p>
-    <hr>
-    <p class="type-label">Párrafo de muestra</p>
-    <p class="lorem">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. <span class="accent">Marcas con intención</span> nace de mirar de cerca antes de diseñar: sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-  </div>
-</section>
+      <span class="brand-badge">✦ Marca activa de Yellower</span>
 
-<!-- ============ SECCIÓN 4: PALETA DE COLOR (dividida por tarjetas) ============ -->
-<section id="paleta">
-  <div class="section-head">
-    <p class="section-eyebrow">Sistema de color</p>
-    <h2 class="section-title">Paleta de marca</h2>
-  </div>
+      <p class="brand-desc">
+        Estudio creativo y digital especializado en marcas con intención — branding, social media y diseño web para empresas, emprendimientos y marcas personales en LATAM y el mundo.
+        <!-- INSERTA AQUÍ la descripción real de esta marca -->
+      </p>
 
-  <!--
-    Cada color vive en su propia tarjeta, con todos sus valores
-    visibles de una vez (sin depender de hover). Haz clic sobre
-    cualquier valor para copiarlo. INSERTA AQUÍ nuevos colores
-    duplicando un bloque .color-card completo.
-  -->
-  <div class="palette-grid">
+      <a class="brand-meta-link" href="https://yellower.co" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg>
+        yellower.co
+      </a>
 
-    <div class="color-card">
-      <div class="swatch" style="background:#202020;"></div>
-      <div class="info">
-        <div class="color-name">Deep Black</div>
-        <div class="color-value" data-copy="#202020"><span>HEX #202020</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="RGB(32, 32, 32)"><span>RGB 32, 32, 32</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="CMYK(0, 0, 0, 87)"><span>CMYK 0, 0, 0, 87</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="PANTONE Black 6 C"><span>PANTONE Black 6 C*</span><span class="copy-hint">copiar</span></div>
+      <div class="social-row">
+        <!-- INSERTA AQUÍ los enlaces reales de redes. Duplica <a> por cada red -->
+        <a href="https://instagram.com/yellower.co" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#202020" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="https://wa.me/573134553455" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#202020" stroke-width="2"><path d="M3 21l1.6-4.8A8 8 0 1 1 8.8 19.4z"/></svg>
+        </a>
       </div>
     </div>
+  </aside>
 
-    <div class="color-card">
-      <div class="swatch" style="background:#FEFDFA;"></div>
-      <div class="info">
-        <div class="color-name">Cream</div>
-        <div class="color-value" data-copy="#FEFDFA"><span>HEX #FEFDFA</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="RGB(238, 239, 233)"><span>RGB 238, 239, 233</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="CMYK(0, 0, 3, 6)"><span>CMYK 0, 0, 3, 6</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="PANTONE 11-4300 TCX"><span>PANTONE 11-4300 TCX*</span><span class="copy-hint">copiar</span></div>
+  <!-- ============ CONTENIDO PRINCIPAL ============ -->
+  <main class="vault-main">
+
+    <!-- ============ SECCIÓN: LOGOS ============ -->
+    <section class="content-section" id="logos">
+      <div class="section-row">
+        <h2 class="section-title">Logos de Yellower</h2>
+        <!-- El botón "Descargar todo" debe apuntar a un .zip con todos los archivos -->
+        <a class="btn-download-all" href="../assets/logos/yellower-logo-kit.zip" download>
+          Descargar todo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+        </a>
       </div>
-    </div>
 
-    <div class="color-card">
-      <div class="swatch" style="background:#FFD55F;"></div>
-      <div class="info">
-        <div class="color-name">Signature Yellow</div>
-        <div class="color-value" data-copy="#FFD55F"><span>HEX #FFD45F</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="RGB(255, 212, 95)"><span>RGB 255, 212, 95</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="CMYK(0, 17, 63, 0)"><span>CMYK 0, 17, 63, 0</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="PANTONE 128 C"><span>PANTONE 128 C*</span><span class="copy-hint">copiar</span></div>
+      <div class="asset-grid">
+        <!-- INSERTA AQUÍ cada archivo de logo real. Duplica el bloque .asset-card por cada uno -->
+        <div class="asset-card">
+          <a class="asset-visual" href="../assets/logos/yellower-icono.png" download>
+            <img src="../assets/logos/yellower-icono.png" alt="Isotipo Yellower" onerror="this.style.display='none'">
+          </a>
+          <div class="asset-card-footer"><span>Isotipo — flor</span><span class="format-tag">PNG</span></div>
+        </div>
+        <div class="asset-card">
+          <a class="asset-visual" href="../assets/logos/yellower-wordmark.svg" download>
+            <img src="../assets/logos/yellower-wordmark.svg" alt="Wordmark Yellower" onerror="this.style.display='none'">
+          </a>
+          <div class="asset-card-footer"><span>Wordmark completo</span><span class="format-tag">SVG</span></div>
+        </div>
+        <div class="asset-card on-dark">
+          <a class="asset-visual" href="../assets/logos/yellower-negativo.png" download>
+            <img src="../assets/logos/yellower-negativo.png" alt="Logo negativo Yellower" onerror="this.style.display='none'">
+          </a>
+          <div class="asset-card-footer"><span>Versión negativa</span><span class="format-tag">PNG</span></div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="color-card">
-      <div class="swatch" style="background:#6B6B63;"></div>
-      <div class="info">
-        <div class="color-name">Grey</div>
-        <div class="color-value" data-copy="#6B6B63"><span>HEX #6B6B63</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="RGB(107, 107, 99)"><span>RGB 107, 107, 99</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="CMYK(0, 0, 7, 58)"><span>CMYK 0, 0, 7, 58</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="PANTONE 405 C"><span>PANTONE 405 C*</span><span class="copy-hint">copiar</span></div>
+    <!-- ============ SECCIÓN: TIPOGRAFÍAS ============ -->
+    <section class="content-section" id="tipografias">
+      <div class="section-row">
+        <h2 class="section-title">Tipografías de Yellower</h2>
       </div>
-    </div>
 
-    <div class="color-card">
-      <div class="swatch" style="background:#1691EF;"></div>
-      <div class="info">
-        <div class="color-name">Blue</div>
-        <div class="color-value" data-copy="#1691EF"><span>HEX #1691EF</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="RGB(22, 145, 239)"><span>RGB 22, 145, 239</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="CMYK(91, 39, 0, 6)"><span>CMYK 91, 39, 0, 6</span><span class="copy-hint">copiar</span></div>
-        <div class="color-value" data-copy="PANTONE 2925 C"><span>PANTONE 2925 C*</span><span class="copy-hint">copiar</span></div>
+      <div class="asset-grid">
+        <!-- INSERTA AQUÍ los archivos de fuente reales (.ttf / .otf / .woff2) -->
+        <div class="asset-card">
+          <a class="asset-visual" href="../assets/fonts/tt-norms-pro-variable.ttf" download>
+            <span class="type-preview">Aa</span>
+          </a>
+          <div class="asset-card-footer"><span>TT Norms Pro Variable</span><span class="format-tag">TTF</span></div>
+        </div>
+        <div class="asset-card">
+          <a class="asset-visual" href="../assets/fonts/georgia-italic-info.pdf" download>
+            <span class="type-preview" style="font-style:italic; font-family: Georgia, serif;">Aa</span>
+          </a>
+          <div class="asset-card-footer"><span>Georgia (acento editorial)</span><span class="format-tag">GUÍA</span></div>
+        </div>
       </div>
-    </div>
 
-  </div>
-  <p class="palette-note">*Equivalencia PANTONE aproximada. Confirma contra una guía física antes de imprenta.</p>
-</section>
+      <!-- ============ CAJA TIPOGRÁFICA — vista previa en vivo ============ -->
+      <div class="type-specimen" style="margin-top: 24px;">
+        <p class="type-label">Mayúsculas</p>
+        <p class="alphabet-block upper">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+        <p class="type-label">Minúsculas</p>
+        <p class="alphabet-block lower">abcdefghijklmnopqrstuvwxyz</p>
+        <p class="type-label">Números y símbolos soportados</p>
+        <p class="symbols-block">0123456789 · ¿? ¡! & % $ # @ + − = / ✦</p>
+        <hr>
+        <p class="type-label">Párrafo de muestra</p>
+        <p class="lorem">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. <span class="accent">Marcas con intención</span> nace de mirar de cerca antes de diseñar: sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </div>
+    </section>
 
-<footer class="vault-footer">
-  ✦ Yellower Design Studio® — bóveda de branding de uso interno
-</footer>
+    <!-- ============ SECCIÓN: PALETA DE COLOR (tabla, ref. Brandfetch) ============ -->
+    <section class="content-section" id="paleta">
+      <div class="section-row">
+        <h2 class="section-title">Colores de marca</h2>
+      </div>
+
+      <!-- Haz clic en cualquier valor para copiarlo. INSERTA AQUÍ nuevas filas <tr> por cada color adicional. -->
+      <div class="colors-table-wrap">
+        <table class="colors-table">
+          <thead>
+            <tr>
+              <th>Código Hex</th>
+              <th>Nombre</th>
+              <th>RGB</th>
+              <th>CMYK</th>
+              <th>PANTONE*</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td>
+                <button class="hex-chip" style="background:#202020; color:#fff;" data-copy="#202020">
+                  #202020
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </td>
+              <td>Deep Black</td>
+              <td><button class="copy-cell" data-copy="32, 32, 32">32, 32, 32 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="0, 0, 0, 87">0, 0, 0, 87 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="PANTONE Black 6 C">Black 6 C <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+            </tr>
+
+            <tr>
+              <td>
+                <button class="hex-chip" style="background:#EEEFE9; color:#202020;" data-copy="#EEEFE9">
+                  #EEEFE9
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </td>
+              <td>Cream</td>
+              <td><button class="copy-cell" data-copy="238, 239, 233">238, 239, 233 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="0, 0, 3, 6">0, 0, 3, 6 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="PANTONE 11-4300 TCX">11-4300 TCX <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+            </tr>
+
+            <tr>
+              <td>
+                <button class="hex-chip" style="background:#FFD45F; color:#202020;" data-copy="#FFD45F">
+                  #FFD45F
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </td>
+              <td>Signature Yellow</td>
+              <td><button class="copy-cell" data-copy="255, 212, 95">255, 212, 95 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="0, 17, 63, 0">0, 17, 63, 0 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="PANTONE 128 C">128 C <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+            </tr>
+
+            <tr>
+              <td>
+                <button class="hex-chip" style="background:#6B6B63; color:#fff;" data-copy="#6B6B63">
+                  #6B6B63
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </td>
+              <td>Grey</td>
+              <td><button class="copy-cell" data-copy="107, 107, 99">107, 107, 99 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="0, 0, 7, 58">0, 0, 7, 58 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="PANTONE 405 C">405 C <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+            </tr>
+
+            <tr>
+              <td>
+                <button class="hex-chip" style="background:#1691EF; color:#fff;" data-copy="#1691EF">
+                  #1691EF
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </td>
+              <td>Blue</td>
+              <td><button class="copy-cell" data-copy="22, 145, 239">22, 145, 239 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="91, 39, 0, 6">91, 39, 0, 6 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+              <td><button class="copy-cell" data-copy="PANTONE 2925 C">2925 C <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <p class="palette-note">*Equivalencia PANTONE aproximada. Confirma contra una guía física antes de imprenta.</p>
+    </section>
+
+  </main>
+</div>
 
 <div id="copyToast">Copiado ✦</div>
 
 <script>
-  /* ============ COPIAR AL PORTAPAPELES ============ */
+  /* ============ COPIAR AL PORTAPAPELES ============
+     Funciona tanto para los chips de HEX como para las celdas de
+     RGB / CMYK / PANTONE — cualquier elemento con data-copy. */
   const toast = document.getElementById("copyToast");
   let toastTimer = null;
 
-  document.querySelectorAll(".color-value").forEach(el => {
+  document.querySelectorAll("[data-copy]").forEach(el => {
     el.addEventListener("click", async () => {
       const text = el.dataset.copy;
       try{
         await navigator.clipboard.writeText(text);
       }catch(err){
-        // Fallback para navegadores sin acceso al portapapeles (ej. http sin permisos)
         const temp = document.createElement("textarea");
         temp.value = text;
         document.body.appendChild(temp);
@@ -516,9 +641,6 @@
         document.execCommand("copy");
         document.body.removeChild(temp);
       }
-      el.classList.add("just-copied");
-      setTimeout(() => el.classList.remove("just-copied"), 500);
-
       toast.textContent = `Copiado: ${text} ✦`;
       toast.classList.add("show");
       clearTimeout(toastTimer);
