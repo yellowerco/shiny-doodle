@@ -1,1 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Marcas — Yellower Design Studio®</title>
 
+<!--
+  ============================================================
+  YELLOWER DESIGN STUDIO® — CATÁLOGO DE MARCAS (brands.html)
+  ============================================================
+  100% HTML + CSS + Vanilla JS. Sin backend, sin PHP.
+
+  CANDADO JS (v2):
+  Al escribir la contraseña correcta de una marca, esta página:
+    1. Guarda un token temporal en sessionStorage (se borra solo
+       al cerrar la pestaña).
+    2. Redirige a una URL "ofuscada" — un nombre de archivo con
+       un sufijo aleatorio, difícil de adivinar a simple vista
+       (ej. brands/ylw-8f4b2x.html en vez de brands/yellower.html).
+
+  Sigue sin ser seguridad real de servidor (el código sigue siendo
+  legible si alguien abre el "Ver código fuente"), pero sí evita
+  que un curioso llegue por accidente a una carpeta de marca, que
+  Google la indexe, o que quede un enlace obvio dando vueltas.
+  ============================================================
+-->
+
+<!-- Tipografía: TT Norms Pro Variable es la fuente de marca (instalar localmente).
+     Poppins queda como fallback web para que esto se vea bien en cualquier navegador. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS DE MARCA — YELLOWER ============ */
+  :root{
+    --bg: #FEFDFA;       /* fondo general de la página — más limpio y moderno */
+    --cream: #EEEFE9;    /* color de marca, usado en superficies de tarjetas */
+    --black: #202020;
+    --yellow: #FFD45F;
+    --grey: #6B6B63;
+    --blue: #1691EF;
+
+    --font-display: "TT Norms Pro Variable", "Poppins", sans-serif;
+    --font-editorial: Georgia, "Times New Roman", serif;
+
+    --radius: 22px;
+    --line: 1px solid rgba(32,32,32,0.12);
+    --shadow-soft: 0 1px 2px rgba(32,32,32,0.04);
+    --shadow-hover: 0 18px 36px rgba(32,32,32,0.09);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--black);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ HEADER ============ */
+  header.site-top{
+    padding: 48px 6vw 28px;
+    border-bottom: var(--line);
+  }
+
+  .brandmark{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+  .brandmark .star{ color: var(--blue); font-size: 1.3rem; }
+
+  h1.page-title{
+    margin: 22px 0 10px;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    max-width: 14ch;
+  }
+
+  p.page-sub{
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--grey);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin: 0 0 30px;
+  }
+
+  /* Buscador */
+  .search-wrap{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 560px;
+    background: #fff;
+    border: var(--line);
+    border-radius: 999px;
+    padding: 14px 22px;
+    box-shadow: var(--shadow-soft);
+  }
+  .search-wrap svg{ flex-shrink: 0; }
+  #brandSearch{
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    width: 100%;
+    color: var(--black);
+  }
+  #brandSearch::placeholder{ color: var(--grey); }
+
+  /* ============ BENTO GRID ============ */
+  main{ padding: 48px 6vw 90px; }
+
+  #resultsMeta{
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--grey);
+    margin: 0 0 20px;
+    font-size: 0.95rem;
+  }
+
+  .bento-grid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 22px;
+  }
+
+  /* La tarjeta ocupa 2 de 6 columnas por defecto (3 por fila en desktop).
+     Cada tarjeta "destacada: true" se agranda a 3 columnas — ritmo bento. */
+  .brand-card{
+    grid-column: span 2;
+    background: var(--cream);
+    border: var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .brand-card:hover{ box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+
+  .brand-card.card-wide{ grid-column: span 3; }
+
+  /* Encabezado limpio: logo + nombre/dueño en una sola fila */
+  .card-header-row{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-slot{
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: var(--line);
+  }
+  .logo-slot img{
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+  }
+
+  .name-owner{ min-width: 0; }
+  .name-owner .name-line{
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .name-owner .owner-line{
+    font-weight: 500;
+    color: var(--grey);
+    font-size: 0.88rem;
+    margin-top: 2px;
+  }
+
+  .dates-line{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.8rem;
+    color: var(--grey);
+    border-top: var(--line);
+    padding-top: 14px;
+  }
+
+  .card-actions{
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-radius: 999px;
+    padding: 11px 18px;
+    border: var(--line);
+    cursor: pointer;
+    background: #fff;
+    color: var(--black);
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:hover{ background: var(--black); color: #fff; border-color: var(--black); }
+
+  .btn-primary{
+    background: var(--yellow);
+    border-color: var(--yellow);
+  }
+  .btn-primary:hover{ background: var(--black); color: var(--yellow); border-color: var(--black); }
+
+  .no-results{
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--grey);
+  }
+
+  /* ============ MODALES ============ */
+  .overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(32,32,32,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 100;
+  }
+  .overlay.open{ display: flex; }
+
+  .modal{
+    background: #fff;
+    border: var(--line);
+    border-radius: 24px;
+    padding: 34px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    box-shadow: var(--shadow-hover);
+  }
+  .modal .close-x{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+    color: var(--black);
+  }
+  .modal h3{
+    margin: 0 0 4px;
+    font-size: 1.35rem;
+    font-weight: 800;
+  }
+  .modal .modal-sub{
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--grey);
+    margin: 0 0 22px;
+    font-size: 0.95rem;
+  }
+
+  /* Modal de redes */
+  .social-list{
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .social-list a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: var(--black);
+    background: var(--cream);
+    border: var(--line);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .social-list a:hover{ background: var(--yellow); }
+  .social-list .handle{ color: var(--grey); font-weight: 500; }
+
+  /* Modal de contraseña */
+  #pwForm{ display: flex; flex-direction: column; gap: 14px; }
+  #pwInput{
+    font-family: var(--font-display);
+    padding: 13px 16px;
+    border: var(--line);
+    border-radius: 14px;
+    font-size: 1rem;
+    outline: none;
+    background: var(--cream);
+  }
+  #pwError{
+    color: #B3261E;
+    font-size: 0.85rem;
+    display: none;
+    font-weight: 600;
+  }
+
+  /* ============ FOOTER MARQUEE — coherente con el resto del sitio ============ */
+  footer.marquee-footer{
+    border-top: var(--line);
+    background: var(--black);
+    color: var(--bg);
+    padding: 18px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track{
+    display: inline-block;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    animation: scroll-marquee 28s linear infinite;
+  }
+  @keyframes scroll-marquee{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+
+  @media (max-width: 900px){
+    .bento-grid{ grid-template-columns: repeat(2, 1fr); }
+    .brand-card, .brand-card.card-wide{ grid-column: span 2; }
+  }
+  @media (max-width: 520px){
+    .bento-grid{ grid-template-columns: 1fr; }
+    .brand-card, .brand-card.card-wide{ grid-column: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .marquee-track{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-top">
+  <div class="brandmark"><span class="star">✦</span> YELLOWER DESIGN STUDIO®</div>
+  <h1 class="page-title">Catálogo de marcas</h1>
+  <p class="page-sub">Todas las marcas que hemos vestido, en un solo lugar.</p>
+
+  <div class="search-wrap">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#202020" stroke-width="2">
+      <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="brandSearch" placeholder="Buscar marca o dueño…">
+  </div>
+</header>
+
+<main>
+  <p id="resultsMeta"></p>
+  <div class="bento-grid" id="bentoGrid"><!-- Las tarjetas se generan en JS --></div>
+</main>
+
+<!-- ============ MODAL: REDES ============ -->
+<div class="overlay" id="socialsOverlay">
+  <div class="modal">
+    <button class="close-x" data-close="socialsOverlay" aria-label="Cerrar">✕</button>
+    <h3 id="socialsTitle">Redes</h3>
+    <p class="modal-sub">Enlaces activos de esta marca.</p>
+    <ul class="social-list" id="socialsList"><!-- generado en JS --></ul>
+  </div>
+</div>
+
+<!-- ============ MODAL: RECUPERAR BRANDING (contraseña) ============ -->
+<div class="overlay" id="pwOverlay">
+  <div class="modal">
+    <button class="close-x" data-close="pwOverlay" aria-label="Cerrar">✕</button>
+    <h3 id="pwTitle">Recuperar branding</h3>
+    <p class="modal-sub">Escribe la contraseña de esta marca para entrar a su bóveda de archivos.</p>
+    <form id="pwForm">
+      <input type="password" id="pwInput" placeholder="Contraseña" autocomplete="off">
+      <p id="pwError">Contraseña incorrecta. Intenta de nuevo.</p>
+      <button type="submit" class="btn btn-primary">Entrar ✦</button>
+    </form>
+  </div>
+</div>
+
+<footer class="marquee-footer">
+  <div class="marquee-track">
+    EL EQUIPO QUE SIEMPRE BUSCASTE ✦ RESPONSABLES PERO GRACIOSOS ✦ EL EQUIPO QUE SIEMPRE SOÑASTE ✦ HACEMOS TUS IDEAS REALIDAD ✦
+    EL EQUIPO QUE SIEMPRE BUSCASTE ✦ RESPONSABLES PERO GRACIOSOS ✦ EL EQUIPO QUE SIEMPRE SOÑASTE ✦ HACEMOS TUS IDEAS REALIDAD ✦
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     ⚙️ DATOS — INSERTA AQUÍ TUS MARCAS REALES
+     ------------------------------------------------------------
+     Cada objeto es una tarjeta del catálogo. Campos:
+       id           -> identificador único (sin espacios)
+       nombre       -> nombre de la marca
+       dueno        -> dueño / responsable de la marca
+       logo         -> ruta a la imagen del logo (png/svg)
+       creado       -> fecha de creación del proyecto (texto libre)
+       actualizado  -> fecha de última actualización
+       redes        -> array de { plataforma, handle, url }
+       password     -> clave para "Recuperar Branding" de ESA marca
+       destino      -> ruta OFUSCADA del archivo protegido de esta marca
+                       (nombre difícil de adivinar, ej. "ylw-8f4b2x")
+       tokenKey     -> nombre de la llave de sessionStorage para esta marca
+                       (debe coincidir con la que revisa el guardián en
+                       brands/[destino].html — ver ese archivo)
+       destacada    -> true/false — si true, la tarjeta se agranda (bento)
+  ============================================================ */
+  const marcas = [
+    {
+      id: "yellower",
+      nombre: "Yellower Design Studio",
+      dueno: "Yani Plazas",
+      logo: "assets/logos/yellower-logo.png",
+      creado: "Ene 2024",
+      actualizado: "Ago 2026",
+      redes: [
+        { plataforma: "Instagram", handle: "@yellower.co", url: "https://instagram.com/yellower.co" },
+        { plataforma: "WhatsApp", handle: "313 455 3455", url: "https://wa.me/573134553455" }
+      ],
+      password: "yellower2026",
+      destino: "brands/ylw-8f4b2x.html",
+      tokenKey: "auth_yellower",
+      destacada: true
+    },
+    {
+      id: "ejemplo-marca",
+      nombre: "Nombre de Marca",
+      dueno: "Nombre del Dueño",
+      logo: "assets/logos/placeholder-logo.png",
+      creado: "Mes Año",
+      actualizado: "Mes Año",
+      redes: [
+        { plataforma: "Instagram", handle: "@usuario", url: "https://instagram.com/usuario" }
+      ],
+      password: "cambia-esta-clave",
+      // Genera un sufijo aleatorio propio por marca — evita nombres obvios como "marca2.html"
+      destino: "brands/xyz-9k2qp1.html",
+      tokenKey: "auth_ejemplo_marca",
+      destacada: false
+    }
+    // Agrega tantos objetos como marcas tengas...
+  ];
+
+  const grid = document.getElementById("bentoGrid");
+  const resultsMeta = document.getElementById("resultsMeta");
+
+  function renderGrid(list){
+    grid.innerHTML = "";
+    if(list.length === 0){
+      grid.innerHTML = `<p class="no-results">No encontramos ninguna marca con ese nombre.</p>`;
+      resultsMeta.textContent = "0 resultados";
+      return;
+    }
+    resultsMeta.textContent = `${list.length} marca${list.length !== 1 ? "s" : ""}`;
+
+    list.forEach(marca => {
+      const card = document.createElement("article");
+      card.className = "brand-card" + (marca.destacada ? " card-wide" : "");
+
+      card.innerHTML = `
+        <div class="card-header-row">
+          <div class="logo-slot">
+            <img src="${marca.logo}" alt="Logo de ${marca.nombre}" onerror="this.style.display='none'">
+          </div>
+          <div class="name-owner">
+            <div class="name-line">${marca.nombre}</div>
+            <div class="owner-line">${marca.dueno}</div>
+          </div>
+        </div>
+        <div class="dates-line">
+          <span>Creación: ${marca.creado}</span>
+          <span>Última actualización: ${marca.actualizado}</span>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-redes" data-id="${marca.id}">Redes</button>
+          <button class="btn btn-primary btn-recuperar" data-id="${marca.id}">Recuperar Branding</button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  renderGrid(marcas);
+
+  /* ============ BUSCADOR ============ */
+  document.getElementById("brandSearch").addEventListener("input", (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const filtradas = marcas.filter(m =>
+      m.nombre.toLowerCase().includes(q) || m.dueno.toLowerCase().includes(q)
+    );
+    renderGrid(filtradas);
+  });
+
+  /* ============ MODAL REDES ============ */
+  const socialsOverlay = document.getElementById("socialsOverlay");
+  const socialsList = document.getElementById("socialsList");
+  const socialsTitle = document.getElementById("socialsTitle");
+
+  grid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn-redes");
+    if(!btn) return;
+    const marca = marcas.find(m => m.id === btn.dataset.id);
+    socialsTitle.textContent = `Redes de ${marca.nombre}`;
+    socialsList.innerHTML = marca.redes.map(r => `
+      <li><a href="${r.url}" target="_blank" rel="noopener">${r.plataforma} <span class="handle">${r.handle}</span></a></li>
+    `).join("");
+    socialsOverlay.classList.add("open");
+  });
+
+  /* ============ MODAL RECUPERAR BRANDING (contraseña + candado JS) ============ */
+  const pwOverlay = document.getElementById("pwOverlay");
+  const pwForm = document.getElementById("pwForm");
+  const pwInput = document.getElementById("pwInput");
+  const pwError = document.getElementById("pwError");
+  const pwTitle = document.getElementById("pwTitle");
+  let marcaActiva = null;
+
+  grid.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn-recuperar");
+    if(!btn) return;
+    marcaActiva = marcas.find(m => m.id === btn.dataset.id);
+    pwTitle.textContent = `Recuperar branding — ${marcaActiva.nombre}`;
+    pwInput.value = "";
+    pwError.style.display = "none";
+    pwOverlay.classList.add("open");
+    setTimeout(() => pwInput.focus(), 50);
+  });
+
+  pwForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if(!marcaActiva) return;
+    if(pwInput.value === marcaActiva.password){
+      // Token temporal: vive solo mientras la pestaña esté abierta.
+      // El archivo protegido (brands/[destino].html) lo revisa apenas carga
+      // y expulsa a quien no lo tenga, antes de mostrar contenido.
+      sessionStorage.setItem(marcaActiva.tokenKey, "true");
+      window.location.href = marcaActiva.destino;
+    } else {
+      pwError.style.display = "block";
+      pwInput.value = "";
+      pwInput.focus();
+    }
+  });
+
+  /* ============ CERRAR MODALES ============ */
+  document.querySelectorAll("[data-close]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.getElementById(btn.dataset.close).classList.remove("open");
+    });
+  });
+  document.querySelectorAll(".overlay").forEach(ov => {
+    ov.addEventListener("click", (e) => {
+      if(e.target === ov) ov.classList.remove("open");
+    });
+  });
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape"){
+      document.querySelectorAll(".overlay.open").forEach(ov => ov.classList.remove("open"));
+    }
+  });
+</script>
+</body>
+</html>
