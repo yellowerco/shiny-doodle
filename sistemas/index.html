@@ -267,7 +267,7 @@
     overflow:hidden;
   }
   .detail-panel::before{
-    content:"✦";
+    content:"✳";
     position:absolute;
     top:-14px;
     right:16px;
@@ -278,12 +278,11 @@
     pointer-events:none;
   }
 
-  /* Contenedor de flechas Mobile First: Abajo y con gap */
   .panel-nav{
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:16px; /* Separadas entre sí con un gap claro */
+    gap:16px;
     margin-top:24px;
     z-index:2;
   }
@@ -406,7 +405,6 @@
   }
   .panel-cta:hover{background:#000;}
 
-  /* Escritorio: Reubicamos las flechas flotando arriba a la derecha como antes si la pantalla es grande */
   @media (min-width: 768px) {
     .panel-wrap { margin: 44px auto 0; padding: 0 32px; }
     .detail-panel { padding: 44px 44px 40px; border-radius: 24px; }
@@ -601,7 +599,7 @@
 
 <main>
   <section class="hero">
-    <p class="eyebrow">Yellower Design Studio® ✦ Sistemas & Automatización</p>
+    <p class="eyebrow">Yellower Design Studio® ✳ Sistemas & Automatización</p>
     <h1>Hay un <span class="editorial">sistema</span> esperando ser construido.</h1>
     <p class="lead">Detrás de cada tarea repetitiva, cada hoja de cálculo manual o cada "otra vez tengo que hacer esto a mano", hay un sistema esperando ser construido. Cuéntanos qué te quita tiempo y lo resolvemos desde el código.</p>
   </section>
@@ -614,7 +612,7 @@
   </div>
 
   <section class="picker-section">
-    <p class="eyebrow picker-eyebrow">✦ Elige tu necesidad</p>
+    <p class="eyebrow picker-eyebrow">✳ Elige tu necesidad</p>
     <h2>¿Qué necesitas automatizar hoy?</h2>
     <p class="picker-sub">Elige las opciones que necesites — puedes marcar varias o dejar que rotren solas.</p>
 
@@ -646,7 +644,7 @@
 
   <section class="process-section">
     <div class="process-head">
-      <p class="eyebrow">✦ Cómo lo hacemos</p>
+      <p class="eyebrow">✳ Cómo lo hacemos</p>
       <h2>De la necesidad al <span class="editorial">sistema.</span></h2>
     </div>
     <div class="process-grid">
@@ -820,6 +818,7 @@
 
     setTimeout(() => {
       if(selectedIndices.length === 0){
+        // MODO AUTOMÁTICO (0 SELECCIONADAS)
         const need = needs[currentIndex];
         panelInner.innerHTML = `
           <p class="panel-answer">Mostrando sugerencia: <strong>“${need.chip}”</strong></p>
@@ -832,13 +831,28 @@
           </ul>
           <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${need.wa}">Cuéntanos tu caso ↗</a>
         `;
+      } else if(selectedIndices.length === 1) {
+        // MODO 1 SOLA SELECCION (MUESTRA TODO EL DETALLE Y VIÑETAS)
+        const need = needs[selectedIndices[0]];
+        panelInner.innerHTML = `
+          <p class="panel-answer">Elegiste: <strong>“${need.chip}”</strong></p>
+          <span class="panel-icon">${need.icon}</span>
+          <p class="panel-tag">${need.tag}</p>
+          <h3>${need.title}</h3>
+          <p class="panel-desc">${need.desc}</p>
+          <ul class="panel-bullets">
+            ${need.bullets.map(b => `<li><span class="check">✓</span>${b}</li>`).join('')}
+          </ul>
+          <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${need.wa}">Cuéntanos tu caso ↗</a>
+        `;
       } else {
+        // MODO MÚLTIPLES SELECCIONES (2 O MÁS - MUESTRA RESUMEN)
         const selectedNeeds = selectedIndices.map(i => needs[i]);
         const titlesHtml = selectedNeeds.map(n => `• ${n.title}`).join('<br>');
         const combinedWaText = encodeURIComponent('Hola Yellower, me interesan los siguientes servicios de automatización:\n' + selectedNeeds.map(n => `- ${n.title}`).join('\n'));
 
         panelInner.innerHTML = `
-          <p class="panel-answer">Has seleccionado <strong>${selectedIndices.length} necesidad${selectedIndices.length > 1 ? 'es' : ''}</strong></p>
+          <p class="panel-answer">Has seleccionado <strong>${selectedIndices.length} necesidades</strong></p>
           <span class="panel-icon">✨</span>
           <p class="panel-tag">Solución Combinada</p>
           <h3>Automatización a la medida</h3>
