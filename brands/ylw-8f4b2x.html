@@ -30,7 +30,7 @@
     var TOKEN_KEY = "auth_yellower"; // <-- INSERTA AQUÍ el tokenKey de esta marca
     var autorizado = sessionStorage.getItem(TOKEN_KEY) === "true";
     if(!autorizado){
-      window.location.replace("../brands.html");
+      window.location.replace("./");
     } else {
       // Solo si el token es válido, se permite pintar la página.
       document.documentElement.style.visibility = "visible";
@@ -329,7 +329,7 @@
 <div class="deco-star s2">✦</div>
 
 <header class="vault-top">
-  <a class="back-link" href="../brands.html">← Volver al catálogo</a>
+  <a class="back-link" href="./">← Volver al catálogo</a>
   <div class="vault-title-row">
     <span class="star">✦</span>
     <h1 class="vault-title">Yellower Design Studio</h1>
