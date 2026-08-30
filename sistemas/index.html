@@ -568,7 +568,7 @@
       <div class="panel-inner" id="panelInner">
         <!-- content injected by JS -->
       </div>
-      <!-- Flechas de navegación abajo en móvil (con gap) y arriba en desktop -->
+      <!-- Flechas de navegación -->
       <div class="panel-nav">
         <button type="button" class="panel-nav-btn" id="panelPrevBtn" aria-label="Necesidad anterior">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -759,53 +759,30 @@
     panelInner.classList.remove('show');
 
     setTimeout(() => {
-      if(selectedIndices.length === 0){
-        // MODO AUTOMÁTICO (0 SELECCIONADAS)
-        const need = needs[currentIndex];
-        panelInner.innerHTML = `
-          <p class="panel-answer">Elegiste: <strong>“${need.chip}”</strong></p>
-          <span class="panel-icon">${need.icon}</span>
-          <p class="panel-tag">${need.tag}</p>
-          <h3>${need.title}</h3>
-          <p class="panel-desc">${need.desc}</p>
-          <ul class="panel-bullets">
-            ${need.bullets.map(b => `<li><span class="check">✓</span>${b}</li>`).join('')}
-          </ul>
-          <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${need.wa}">Cuéntanos tu caso ↗</a>
-        `;
-      } else if(selectedIndices.length === 1) {
-        // MODO 1 SOLA SELECCION (MUESTRA TODO EL DETALLE Y VIÑETAS)
-        const need = needs[selectedIndices[0]];
-        panelInner.innerHTML = `
-          <p class="panel-answer">Elegiste: <strong>“${need.chip}”</strong></p>
-          <span class="panel-icon">${need.icon}</span>
-          <p class="panel-tag">${need.tag}</p>
-          <h3>${need.title}</h3>
-          <p class="panel-desc">${need.desc}</p>
-          <ul class="panel-bullets">
-            ${need.bullets.map(b => `<li><span class="check">✓</span>${b}</li>`).join('')}
-          </ul>
-          <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${need.wa}">Cuéntanos tu caso ↗</a>
-        `;
-      } else {
-        // MODO MÚLTIPLES SELECCIONES (2 O MÁS - MUESTRA RESUMEN)
-        const selectedNeeds = selectedIndices.map(i => needs[i]);
-        const titlesHtml = selectedNeeds.map(n => `• ${n.title}`).join('<br>');
-        const combinedWaText = encodeURIComponent('Hola Yellower, me interesan los siguientes servicios de automatización:\n' + selectedNeeds.map(n => `- ${n.title}`).join('\n'));
+      const need = needs[currentIndex];
+      
+      let answerPrefix = selectedIndices.length > 0 ? "Elegiste:" : "Mostrando sugerencia:";
+      let waUrl = `https://wa.me/573134553455?text=${need.wa}`;
+      let ctaText = "Cuéntanos tu caso ↗";
 
-        // Se agregó font-size: 15px y max-width: 520px al div de los títulos para que el texto de selección múltiple también coincida con el estilo de la descripción original
-        panelInner.innerHTML = `
-          <p class="panel-answer">Has seleccionado <strong>${selectedIndices.length} necesidades</strong></p>
-          <span class="panel-icon">✨</span>
-          <p class="panel-tag">Solución Combinada</p>
-          <h3>Automatización a la medida</h3>
-          <p class="panel-desc">Has seleccionado múltiples áreas clave para potenciar tu negocio:</p>
-          <div style="font-size: 15px; font-weight: 700; margin-bottom: 26px; line-height: 1.6; color: var(--black); max-width: 520px;">
-            ${titlesHtml}
-          </div>
-          <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${combinedWaText}">Cotizar selección ↗</a>
-        `;
+      // Si hay más de 1 selección, modificamos el CTA para incluir todas las opciones marcadas.
+      if (selectedIndices.length > 1) {
+        const selectedNeeds = selectedIndices.map(i => needs[i]);
+        ctaText = `Cotizar ${selectedIndices.length} opciones ↗`;
+        waUrl = `https://wa.me/573134553455?text=` + encodeURIComponent('Hola Yellower, me interesan los siguientes servicios de automatización:\n' + selectedNeeds.map(n => `- ${n.title}`).join('\n'));
       }
+
+      panelInner.innerHTML = `
+        <p class="panel-answer">${answerPrefix} <strong>“${need.chip}”</strong></p>
+        <span class="panel-icon">${need.icon}</span>
+        <p class="panel-tag">${need.tag}</p>
+        <h3>${need.title}</h3>
+        <p class="panel-desc">${need.desc}</p>
+        <ul class="panel-bullets">
+          ${need.bullets.map(b => `<li><span class="check">✓</span>${b}</li>`).join('')}
+        </ul>
+        <a class="panel-cta" target="_blank" rel="noopener" href="${waUrl}">${ctaText}</a>
+      `;
       requestAnimationFrame(() => panelInner.classList.add('show'));
     }, 180);
   }
@@ -815,9 +792,17 @@
 
     const pos = selectedIndices.indexOf(index);
     if(pos > -1){
+      // Si el usuario deselecciona una tarjeta
       selectedIndices.splice(pos, 1);
+      // Si quedan tarjetas seleccionadas, mostramos la primera de ellas
+      if(selectedIndices.length > 0 && currentIndex === index) {
+         currentIndex = selectedIndices[0];
+      }
     } else {
+      // Si el usuario selecciona una nueva tarjeta
       selectedIndices.push(index);
+      selectedIndices.sort((a,b) => a - b);
+      currentIndex = index; // Mostramos inmediatamente la que acaba de seleccionar
     }
 
     renderChips();
@@ -850,10 +835,15 @@
 
   panelPrevBtn.addEventListener('click', () => {
     stopAutoPlay();
-    currentIndex = (currentIndex - 1 + needs.length) % needs.length;
-    if(selectedIndices.length > 0) {
-      selectedIndices = [currentIndex];
-      renderChips();
+    if (selectedIndices.length > 0) {
+      // Si hay seleccionadas, navegamos exclusivamente entre ellas
+      let pos = selectedIndices.indexOf(currentIndex);
+      if (pos === -1) pos = 0;
+      let prevPos = (pos - 1 + selectedIndices.length) % selectedIndices.length;
+      currentIndex = selectedIndices[prevPos];
+    } else {
+      // Si no hay seleccionadas, navegamos por todas
+      currentIndex = (currentIndex - 1 + needs.length) % needs.length;
     }
     renderPanel();
     if(selectedIndices.length === 0) startAutoPlay();
@@ -861,15 +851,21 @@
 
   panelNextBtn.addEventListener('click', () => {
     stopAutoPlay();
-    currentIndex = (currentIndex + 1) % needs.length;
-    if(selectedIndices.length > 0) {
-      selectedIndices = [currentIndex];
-      renderChips();
+    if (selectedIndices.length > 0) {
+      // Si hay seleccionadas, navegamos exclusivamente entre ellas
+      let pos = selectedIndices.indexOf(currentIndex);
+      if (pos === -1) pos = 0;
+      let nextPos = (pos + 1) % selectedIndices.length;
+      currentIndex = selectedIndices[nextPos];
+    } else {
+      // Si no hay seleccionadas, navegamos por todas
+      currentIndex = (currentIndex + 1) % needs.length;
     }
     renderPanel();
     if(selectedIndices.length === 0) startAutoPlay();
   });
 
+  // Inicialización
   renderChips();
   renderPanel();
   startAutoPlay();
