@@ -324,7 +324,7 @@ part {
 }
 
 .services {
-    background: #d7d5ce;
+    background: var(--cream);
     padding: 115px 0
 }
 
