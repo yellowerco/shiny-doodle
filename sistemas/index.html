@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sistemas & Automatización — Yellower Design Studio®</title>
+<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+  <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
-  <link rel="shortcut icon" href="../favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="MyWebSite" />
-  <link rel="manifest" href="../favicon/site.webmanifest" />
 <style>
   :root{
-    --cream:#EEEFE9;
+    --cream:#FEFDFA;
     --black:#202020;
-    --yellow:#FFD45F;
-    --yellow-deep:#F2B93E;
+    --yellow:#FFD55F;
+    --yellow-deep:#F2BA3E;
     --grey:#6B6B63;
     --rule: rgba(32,32,32,0.14);
   }
@@ -52,7 +52,7 @@
     position:sticky;
     top:0;
     z-index:80;
-    background:rgba(238,239,233,0.9);
+    background:rgba(254,253,250,0.9);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--rule);
   }
@@ -240,8 +240,6 @@
     text-align:left;
     position:relative;
     overflow:hidden;
-    display: flex;
-    flex-direction: column;
   }
   .detail-panel::before{
     content:"✳";
@@ -249,7 +247,7 @@
     top:-18px;
     right:24px;
     font-size:80px;
-    color:rgba(255,212,95,0.35);
+    color:rgba(255,213,95,0.35);
     font-weight:900;
     line-height:1;
     pointer-events:none;
@@ -305,7 +303,7 @@
     font-size:12px;
     font-weight:700;
     color:var(--grey);
-    background:rgba(255,212,95,0.4);
+    background:rgba(255,213,95,0.4);
     border-radius:8px;
     padding:5px 10px;
     margin:0 0 18px;
@@ -381,29 +379,9 @@
   }
   .panel-cta:hover{background:#000; transform:translateY(-2px);}
 
-  /* Modificación exclusiva para móviles (las flechas abajo con gap) */
   @media (max-width:640px){
     .detail-panel{padding:34px 26px 30px;}
     .detail-panel::before{font-size:60px; top:-10px; right:14px;}
-    
-    .panel-nav {
-      position: static; 
-      justify-content: center;
-      gap: 16px; 
-      margin-top: 32px; 
-      order: 2; 
-    }
-    .panel-inner {
-      order: 1; 
-    }
-    .panel-nav-btn {
-      width: 44px;
-      height: 44px;
-    }
-    .panel-nav-btn svg {
-      width: 18px;
-      height: 18px;
-    }
   }
 
   /* ---------- PROCESS ---------- */
@@ -481,7 +459,7 @@
   }
   .closing-box h2 .editorial{color:var(--yellow);}
   .closing-box p{
-    color:rgba(238,239,233,0.72);
+    color:rgba(254,253,250,0.72);
     font-size:14.5px;
     max-width:420px;
     margin:0 auto 28px;
@@ -556,7 +534,7 @@
   <section class="picker-section">
     <p class="eyebrow picker-eyebrow">✳ Elige tu necesidad</p>
     <h2>¿Qué necesitas automatizar hoy?</h2>
-    <p class="picker-sub">Elige las opciones que necesites — puedes marcar varias o dejar que roten solas.</p>
+    <p class="picker-sub">Elige la frase que más se parezca a lo tuyo — puedes cambiar de opción cuando quieras.</p>
 
     <div class="needs-grid" id="needsGrid">
       <!-- chips injected by JS -->
@@ -565,10 +543,6 @@
 
   <div class="panel-wrap" id="panelWrap">
     <div class="detail-panel">
-      <div class="panel-inner" id="panelInner">
-        <!-- content injected by JS -->
-      </div>
-      <!-- Flechas de navegación -->
       <div class="panel-nav">
         <button type="button" class="panel-nav-btn" id="panelPrevBtn" aria-label="Necesidad anterior">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -580,6 +554,9 @@
             <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
+      </div>
+      <div class="panel-inner" id="panelInner">
+        <!-- content injected by JS -->
       </div>
     </div>
   </div>
@@ -738,42 +715,30 @@
   const needsGrid = document.getElementById('needsGrid');
   const panelInner = document.getElementById('panelInner');
 
-  let selectedIndices = [];
-  let currentIndex = 0;
-  let autoTimer = null;
-
-  function renderChips(){
+  function renderChips(activeIndex){
     needsGrid.innerHTML = '';
     needs.forEach((need, i) => {
       const chip = document.createElement('button');
-      const isActive = selectedIndices.includes(i);
       chip.type = 'button';
-      chip.className = 'need-chip' + (isActive ? ' active' : '');
+      chip.className = 'need-chip' + (i === activeIndex ? ' active' : '');
       chip.innerHTML = `<span class="n-icon">${need.icon}</span><span>${need.chip}</span><span class="n-check"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
-      chip.addEventListener('click', () => toggleNeed(i));
+      chip.addEventListener('click', () => selectNeed(i));
       needsGrid.appendChild(chip);
     });
+    const activeChip = needsGrid.children[activeIndex];
+    if(activeChip){
+      activeChip.classList.add('pop');
+      activeChip.addEventListener('animationend', () => activeChip.classList.remove('pop'), { once:true });
+    }
   }
 
-  function renderPanel(){
+  function renderPanel(index){
+    const need = needs[index];
     panelInner.classList.remove('show');
 
     setTimeout(() => {
-      const need = needs[currentIndex];
-      
-      let answerPrefix = selectedIndices.length > 0 ? "Elegiste:" : "Mostrando sugerencia:";
-      let waUrl = `https://wa.me/573134553455?text=${need.wa}`;
-      let ctaText = "Cuéntanos tu caso ↗";
-
-      // Si hay más de 1 selección, modificamos el CTA para incluir todas las opciones marcadas.
-      if (selectedIndices.length > 1) {
-        const selectedNeeds = selectedIndices.map(i => needs[i]);
-        ctaText = `Cotizar ${selectedIndices.length} opciones ↗`;
-        waUrl = `https://wa.me/573134553455?text=` + encodeURIComponent('Hola Yellower, me interesan los siguientes servicios de automatización:\n' + selectedNeeds.map(n => `- ${n.title}`).join('\n'));
-      }
-
       panelInner.innerHTML = `
-        <p class="panel-answer">${answerPrefix} <strong>“${need.chip}”</strong></p>
+        <p class="panel-answer">Elegiste: <strong>“${need.chip}”</strong></p>
         <span class="panel-icon">${need.icon}</span>
         <p class="panel-tag">${need.tag}</p>
         <h3>${need.title}</h3>
@@ -781,94 +746,34 @@
         <ul class="panel-bullets">
           ${need.bullets.map(b => `<li><span class="check">✓</span>${b}</li>`).join('')}
         </ul>
-        <a class="panel-cta" target="_blank" rel="noopener" href="${waUrl}">${ctaText}</a>
+        <a class="panel-cta" target="_blank" rel="noopener" href="https://wa.me/573134553455?text=${need.wa}">Cuéntanos tu caso ↗</a>
       `;
       requestAnimationFrame(() => panelInner.classList.add('show'));
     }, 180);
   }
 
-  function toggleNeed(index){
-    stopAutoPlay();
+  let currentIndex = 0;
 
-    const pos = selectedIndices.indexOf(index);
-    if(pos > -1){
-      // Si el usuario deselecciona una tarjeta
-      selectedIndices.splice(pos, 1);
-      // Si quedan tarjetas seleccionadas, mostramos la primera de ellas
-      if(selectedIndices.length > 0 && currentIndex === index) {
-         currentIndex = selectedIndices[0];
-      }
-    } else {
-      // Si el usuario selecciona una nueva tarjeta
-      selectedIndices.push(index);
-      selectedIndices.sort((a,b) => a - b);
-      currentIndex = index; // Mostramos inmediatamente la que acaba de seleccionar
-    }
-
-    renderChips();
-    renderPanel();
-
-    if(selectedIndices.length === 0){
-      startAutoPlay();
-    }
-  }
-
-  function startAutoPlay(){
-    stopAutoPlay();
-    autoTimer = setInterval(() => {
-      if(selectedIndices.length === 0){
-        currentIndex = (currentIndex + 1) % needs.length;
-        renderPanel();
-      }
-    }, 3500);
-  }
-
-  function stopAutoPlay(){
-    if(autoTimer){
-      clearInterval(autoTimer);
-      autoTimer = null;
-    }
+  function selectNeed(index){
+    currentIndex = index;
+    renderChips(index);
+    renderPanel(index);
   }
 
   const panelPrevBtn = document.getElementById('panelPrevBtn');
   const panelNextBtn = document.getElementById('panelNextBtn');
 
   panelPrevBtn.addEventListener('click', () => {
-    stopAutoPlay();
-    if (selectedIndices.length > 0) {
-      // Si hay seleccionadas, navegamos exclusivamente entre ellas
-      let pos = selectedIndices.indexOf(currentIndex);
-      if (pos === -1) pos = 0;
-      let prevPos = (pos - 1 + selectedIndices.length) % selectedIndices.length;
-      currentIndex = selectedIndices[prevPos];
-    } else {
-      // Si no hay seleccionadas, navegamos por todas
-      currentIndex = (currentIndex - 1 + needs.length) % needs.length;
-    }
-    renderPanel();
-    if(selectedIndices.length === 0) startAutoPlay();
+    const prev = (currentIndex - 1 + needs.length) % needs.length;
+    selectNeed(prev);
   });
 
   panelNextBtn.addEventListener('click', () => {
-    stopAutoPlay();
-    if (selectedIndices.length > 0) {
-      // Si hay seleccionadas, navegamos exclusivamente entre ellas
-      let pos = selectedIndices.indexOf(currentIndex);
-      if (pos === -1) pos = 0;
-      let nextPos = (pos + 1) % selectedIndices.length;
-      currentIndex = selectedIndices[nextPos];
-    } else {
-      // Si no hay seleccionadas, navegamos por todas
-      currentIndex = (currentIndex + 1) % needs.length;
-    }
-    renderPanel();
-    if(selectedIndices.length === 0) startAutoPlay();
+    const next = (currentIndex + 1) % needs.length;
+    selectNeed(next);
   });
 
-  // Inicialización
-  renderChips();
-  renderPanel();
-  startAutoPlay();
+  selectNeed(0);
 })();
 </script>
 
