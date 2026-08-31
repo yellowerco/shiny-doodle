@@ -35,12 +35,12 @@
 <style>
   /* ============ TOKENS DE MARCA — YELLOWER ============ */
   :root{
-    --bg: #FEFDFA;       /* fondo general de la página — más limpio y moderno */
-    --cream: #EEEFE9;    /* color de marca, usado en superficies de tarjetas */
+    --cream: #FEFDFA;    /* color oficial de marca — fondo de página */
+    --surface: #FFFFFF;  /* blanco para tarjetas y elementos elevados sobre el fondo cream */
     --black: #202020;
-    --yellow: #FFD45F;
-    --grey: #6B6B63;
-    --blue: #1691EF;
+    --yellow: #FFD55F;
+    --grey: #6B6B63;     /* utilitario de texto — no es un color oficial de la paleta */
+    --blue: #1691EF;     /* color de acento digital, aparte de la paleta principal */
 
     --font-display: "TT Norms Pro Variable", "Poppins", sans-serif;
     --font-editorial: Georgia, "Times New Roman", serif;
@@ -57,7 +57,7 @@
 
   body{
     margin: 0;
-    background: var(--bg);
+    background: var(--cream);
     color: var(--black);
     font-family: var(--font-display);
     -webkit-font-smoothing: antialiased;
@@ -84,8 +84,10 @@
     font-size: clamp(2.2rem, 5vw, 3.6rem);
     font-weight: 800;
     line-height: 1.02;
-    max-width: 14ch;
+    max-width: 18ch;
   }
+  h1.page-title .light{ font-weight: 500; color: var(--grey); }
+  h1.page-title .star-inline{ color: var(--yellow); -webkit-text-stroke: 1px var(--black); font-weight: 400; }
 
   p.page-sub{
     font-family: var(--font-editorial);
@@ -120,6 +122,30 @@
   }
   #brandSearch::placeholder{ color: var(--grey); }
 
+  /* ============ BANDA MARQUEE — posicionamiento del estudio ============ */
+  .trust-band{
+    background: var(--yellow);
+    border-top: var(--line);
+    border-bottom: var(--line);
+    padding: 16px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .trust-track{
+    display: inline-block;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    animation: scroll-trust 26s linear infinite;
+  }
+  @keyframes scroll-trust{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .trust-track{ animation: none; }
+  }
+
   /* ============ BENTO GRID ============ */
   main{ padding: 48px 6vw 90px; }
 
@@ -141,7 +167,7 @@
      Cada tarjeta "destacada: true" se agranda a 3 columnas — ritmo bento. */
   .brand-card{
     grid-column: span 2;
-    background: var(--cream);
+    background: var(--surface);
     border: var(--line);
     border-radius: var(--radius);
     padding: 26px;
@@ -155,6 +181,15 @@
   .brand-card:hover{ box-shadow: var(--shadow-hover); transform: translateY(-3px); }
 
   .brand-card.card-wide{ grid-column: span 3; }
+
+  .brand-card .corner-star{
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    color: var(--yellow);
+    font-size: 1.1rem;
+    -webkit-text-stroke: 0.6px var(--black);
+  }
 
   /* Encabezado limpio: logo + nombre/dueño en una sola fila */
   .card-header-row{
@@ -303,7 +338,7 @@
     align-items: center;
     text-decoration: none;
     color: var(--black);
-    background: var(--cream);
+    background: var(--surface);
     border: var(--line);
     border-radius: 14px;
     padding: 12px 16px;
@@ -322,7 +357,7 @@
     border-radius: 14px;
     font-size: 1rem;
     outline: none;
-    background: var(--cream);
+    background: var(--surface);
   }
   #pwError{
     color: #B3261E;
@@ -335,7 +370,7 @@
   footer.marquee-footer{
     border-top: var(--line);
     background: var(--black);
-    color: var(--bg);
+    color: var(--cream);
     padding: 18px 0;
     overflow: hidden;
     white-space: nowrap;
@@ -370,8 +405,8 @@
 
 <header class="site-top">
   <div class="brandmark"><span class="star">✦</span> YELLOWER DESIGN STUDIO®</div>
-  <h1 class="page-title">Catálogo de marcas</h1>
-  <p class="page-sub">Todas las marcas que hemos vestido, en un solo lugar.</p>
+  <h1 class="page-title">Todas las marcas <span class="light">que hemos vestido</span> <span class="star-inline">✦</span></h1>
+  <p class="page-sub">En un solo lugar, listas para buscar y descargar.</p>
 
   <div class="search-wrap">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#202020" stroke-width="2">
@@ -380,6 +415,13 @@
     <input type="text" id="brandSearch" placeholder="Buscar marca o dueño…">
   </div>
 </header>
+
+<div class="trust-band">
+  <div class="trust-track">
+    MARCAS CON INTENCIÓN ✦ BRANDING ✦ SOCIAL MEDIA ✦ DISEÑO WEB ✦ LATAM + WORLDWIDE ✦
+    MARCAS CON INTENCIÓN ✦ BRANDING ✦ SOCIAL MEDIA ✦ DISEÑO WEB ✦ LATAM + WORLDWIDE ✦
+  </div>
+</div>
 
 <main>
   <p id="resultsMeta"></p>
@@ -466,7 +508,7 @@
       ],
       password: "cambia-esta-clave",
       // Genera un sufijo aleatorio propio por marca — evita nombres obvios como "marca2.html"
-      destino: "xyz-9k2qp1.html",
+      destino: "brands/xyz-9k2qp1.html",
       tokenKey: "auth_ejemplo_marca",
       destacada: false
     }
@@ -490,6 +532,7 @@
       card.className = "brand-card" + (marca.destacada ? " card-wide" : "");
 
       card.innerHTML = `
+        <span class="corner-star">✦</span>
         <div class="card-header-row">
           <div class="logo-slot">
             <img src="${marca.logo}" alt="Logo de ${marca.nombre}" onerror="this.style.display='none'">
