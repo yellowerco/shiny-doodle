@@ -1128,7 +1128,11 @@
     });
 
     checkbox.addEventListener('change', () => {
-      openFormBtn.disabled = !checkbox.checked;
+      if (checkbox.checked) {
+        openFormBtn.removeAttribute('disabled');
+      } else {
+        openFormBtn.setAttribute('disabled', 'true');
+      }
       updateSubmitState();
     });
 
