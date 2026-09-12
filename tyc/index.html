@@ -65,7 +65,6 @@
 
   a{color:inherit;}
 
-  /* ---------- NAV ---------- */
   header{
     position:sticky;
     top:0;
@@ -117,7 +116,6 @@
     .nav-links a:not(.nav-cta){display:none;}
   }
 
-  /* ---------- HERO ---------- */
   .hero{
     max-width:1180px;
     margin:0 auto;
@@ -193,7 +191,6 @@
     padding:5px 14px;
   }
 
-  /* ---------- MARQUEE ---------- */
   .marquee{
     border-top:1px solid var(--rule);
     border-bottom:1px solid var(--rule);
@@ -222,7 +219,6 @@
     .marquee-track{animation:none;}
   }
 
-  /* ---------- ACCEPTANCE BLOCK ---------- */
   .acceptance-wrap{
     max-width:1180px;
     margin:0 auto;
@@ -255,7 +251,6 @@
     font-weight:400;
   }
 
-  /* ---------- LAYOUT: TOC + CLAUSES ---------- */
   .content-wrap{
     max-width:1180px;
     margin:0 auto;
@@ -427,7 +422,6 @@
     .clause-head{gap:12px;}
   }
 
-  /* ---------- SIGNATURE CTA ---------- */
   .sign-wrap{
     max-width:1180px;
     margin:0 auto;
@@ -472,7 +466,6 @@
   }
   .btn-yellow:hover{transform:translateY(-2px);}
 
-  /* ---------- FOOTER ---------- */
   footer{
     max-width:1180px;
     margin:0 auto;
@@ -540,7 +533,6 @@
     }
   }
 
-  /* ---------- ACCEPT CHECKBOX ---------- */
   .accept-check{
     display:flex;
     align-items:flex-start;
@@ -594,7 +586,6 @@
     transform:none !important;
   }
 
-  /* ---------- ACCEPTANCE MODAL ---------- */
   .modal-overlay{
     position:fixed;
     inset:0;
@@ -1102,7 +1093,7 @@
       }
     });
   })();
-  
+
   // ---------- ACCEPTANCE FORM ----------
   (function(){
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7-PgO5Gbg0-94N_7XqNebfPX0Rs7dQvcpxRl-U1N55zELnQ3oOlwO4VHzbpTUEbEyLw/exec';
@@ -1126,8 +1117,6 @@
       document.getElementById('f-correo')
     ];
 
-    // The confirm button stays locked until the checkbox is accepted AND
-    // every mandatory field has a value — not just on submit attempt.
     function updateSubmitState(){
       const allFilled = requiredFields.every(field => field.value.trim() !== '');
       submitBtn.disabled = !(checkbox.checked && allFilled);
@@ -1163,7 +1152,6 @@
     });
     closeSuccessBtn.addEventListener('click', () => {
       closeModal();
-      // reset to the form view for any future use of the modal
       setTimeout(() => {
         successView.classList.remove('show');
         formView.style.display = '';
@@ -1195,9 +1183,6 @@
       submitBtn.textContent = 'Enviando…';
 
       try {
-        // 'no-cors' is required because Apps Script Web Apps don't return
-        // CORS headers for anonymous requests — we can't read the response,
-        // but the request still reaches the script and runs normally.
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
@@ -1214,7 +1199,6 @@
         submitBtn.textContent = 'Confirmar aceptación ↗';
       }
     });
-  })();
   })();
 </script>
 
