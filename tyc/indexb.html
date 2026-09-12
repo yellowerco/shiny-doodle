@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Términos y Condiciones — Yellower Design Studio®</title>
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FEFDFA;
+    --black:#202020;
+    --yellow:#FFD55F;
+    --grey:#6B6B63;
+    --rule: rgba(32,32,32,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--black);
+    font-family:'Archivo', sans-serif;
+    font-weight:500;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-touch-callout:none;
+  }
+
+  img, svg{
+    -webkit-user-drag:none;
+    user-drag:none;
+    -khtml-user-drag:none;
+    -moz-user-drag:none;
+    -o-user-drag:none;
+    pointer-events:none;
+  }
+
+  .editorial{
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style:italic;
+    font-weight:400;
+  }
+
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:12px;
+    font-weight:700;
+    color:var(--grey);
+  }
+
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(254,253,250,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:20px 32px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-weight:900;
+    letter-spacing:0.04em;
+    font-size:18px;
+    text-decoration:none;
+  }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:28px;
+  }
+  .nav-links a{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    font-weight:700;
+    text-decoration:none;
+    color:var(--black);
+    opacity:0.75;
+    transition:opacity .2s ease;
+  }
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{
+    background:var(--black);
+    color:var(--cream) !important;
+    padding:10px 18px;
+    border-radius:999px;
+    opacity:1 !important;
+  }
+  .nav-cta:hover{background:#000;}
+
+  @media (max-width:720px){
+    .nav-links a:not(.nav-cta){display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:1180px;
+    margin:0 auto;
+    padding:100px 32px 64px;
+  }
+  .hero .eyebrow{margin-bottom:22px;}
+  .hero h1{
+    font-size:clamp(40px, 6.4vw, 84px);
+    line-height:0.98;
+    font-weight:900;
+    letter-spacing:-0.01em;
+    margin:0 0 28px;
+    max-width:920px;
+  }
+  .hero h1 .editorial{font-size:0.92em;}
+  .hero p.lead{
+    max-width:620px;
+    font-size:17px;
+    color:var(--grey);
+    font-weight:500;
+    margin:0 0 36px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px 40px;
+    padding-top:32px;
+    border-top:1px solid var(--rule);
+  }
+  .hero-meta div{max-width:260px;}
+  .hero-meta .eyebrow{margin-bottom:8px;}
+  .hero-meta p{margin:0;font-size:14px;color:var(--black);}
+
+  .positioning{
+    margin-top:40px;
+    padding:32px 36px;
+    background:var(--cream);
+    border:2px solid var(--black);
+    border-radius:20px;
+    text-align:center;
+  }
+  .positioning .p-tagline{
+    font-family:Georgia, serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(20px, 3vw, 28px);
+    margin:0 0 10px;
+    letter-spacing:0.01em;
+  }
+  .positioning .p-services{
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin:0 0 14px;
+  }
+  .positioning .p-audience{
+    font-size:14.5px;
+    color:var(--grey);
+    font-weight:500;
+    margin:0 0 10px;
+  }
+  .positioning .p-scope{
+    display:inline-block;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--black);
+    background:var(--yellow);
+    border:1.5px solid var(--black);
+    border-radius:999px;
+    padding:5px 14px;
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    overflow:hidden;
+    padding:16px 0;
+    white-space:nowrap;
+  }
+  .marquee-track{
+    display:inline-block;
+    animation: scroll 32s linear infinite;
+  }
+  .marquee span{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-weight:700;
+    color:var(--grey);
+    padding:0 18px;
+  }
+  .marquee span.accent{color:var(--black);}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+  }
+
+  /* ---------- ACCEPTANCE BLOCK ---------- */
+  .acceptance-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:64px 32px 0;
+  }
+  .acceptance{
+    background:var(--yellow);
+    border-radius:20px;
+    padding:40px 44px;
+    display:flex;
+    gap:32px;
+    align-items:flex-start;
+  }
+  .acceptance .mark{
+    font-size:34px;
+    font-weight:900;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .acceptance p{
+    margin:0;
+    font-size:18px;
+    font-weight:600;
+    max-width:760px;
+    line-height:1.45;
+  }
+  .acceptance p .name{
+    font-family:Georgia, serif;
+    font-style:italic;
+    font-weight:400;
+  }
+
+  /* ---------- LAYOUT: TOC + CLAUSES ---------- */
+  .content-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:96px 32px 40px;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .toc{
+    position:sticky;
+    top:110px;
+  }
+  .toc .eyebrow{margin-bottom:18px;}
+  .toc ol{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .toc li a{
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    color:var(--grey);
+    padding:9px 0;
+    border-bottom:1px solid var(--rule);
+    transition:color .2s ease, padding-left .2s ease;
+  }
+  .toc li a .n{
+    font-weight:800;
+    color:var(--black);
+    opacity:0.4;
+    font-size:12px;
+  }
+  .toc li a:hover{color:var(--black);padding-left:4px;}
+
+  @media (max-width:880px){
+    .content-wrap{grid-template-columns:1fr;}
+    .toc{position:static;display:none;}
+  }
+
+  .clauses{
+    display:flex;
+    flex-direction:column;
+  }
+  .clause{
+    padding:44px 0;
+    border-bottom:1px solid var(--rule);
+    scroll-margin-top:120px;
+  }
+  .clause:first-child{padding-top:0;}
+  .clause-head{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    margin-bottom:16px;
+  }
+  .clause-num{
+    font-size:14px;
+    font-weight:900;
+    color:var(--black);
+    background:var(--yellow);
+    border-radius:999px;
+    width:34px;
+    height:34px;
+    min-width:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .clause h2{
+    font-size:22px;
+    font-weight:800;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .clause .body{
+    margin-left:52px;
+    color:var(--black);
+    font-size:15.5px;
+    font-weight:500;
+    max-width:760px;
+  }
+  .clause .body p{margin:0 0 12px;}
+  .clause .body p:last-child{margin-bottom:0;}
+  .clause .body .callout{
+    display:inline;
+    background:linear-gradient(to top, var(--yellow) 42%, transparent 42%);
+    font-weight:700;
+  }
+  .clause .body strong{font-weight:800;}
+  .clause .body .cost{
+    font-family:Georgia, serif;
+    font-style:italic;
+  }
+
+  .bold-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--black);
+    color:var(--cream);
+    text-decoration:none;
+    font-weight:800;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    padding:11px 20px;
+    border-radius:999px;
+    margin:4px 0 16px;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .bold-btn:hover{background:#000; transform:translateY(-2px);}
+  .bold-arrow{font-size:13px;}
+
+  .alt-payments{
+    background:var(--yellow);
+    border:1.5px solid var(--black);
+    border-radius:14px;
+    padding:14px 18px;
+    margin:0 0 16px;
+    max-width:420px;
+  }
+  .alt-payments .eyebrow{margin-bottom:4px;}
+  .alt-payments p:not(.eyebrow){
+    margin:0;
+    font-size:14px;
+    font-weight:600;
+  }
+  .alt-payments .number-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .copy-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--black);
+    color:var(--cream);
+    border:none;
+    border-radius:999px;
+    padding:6px 12px;
+    font-family:'Archivo', sans-serif;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .copy-btn:hover{transform:translateY(-1px);}
+  .copy-btn svg{
+    width:12px;
+    height:12px;
+    flex-shrink:0;
+  }
+  .copy-btn.copied{background:#5B7A4B;}
+
+  @media (max-width:640px){
+    .clause .body{margin-left:0;margin-top:6px;}
+    .clause-head{gap:12px;}
+  }
+
+  /* ---------- SIGNATURE CTA ---------- */
+  .sign-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:40px 32px 0;
+  }
+  .signature{
+    background:var(--black);
+    color:var(--cream);
+    border-radius:20px;
+    padding:64px 48px;
+    text-align:center;
+    margin-top:16px;
+  }
+  .signature .eyebrow{color:var(--yellow);margin-bottom:20px;}
+  .signature h2{
+    font-size:clamp(28px,4vw,44px);
+    font-weight:900;
+    margin:0 0 16px;
+    letter-spacing:-0.01em;
+  }
+  .signature h2 .editorial{color:var(--yellow);}
+  .signature p{
+    color:rgba(254,253,250,0.72);
+    font-size:15px;
+    max-width:460px;
+    margin:0 auto 32px;
+  }
+  .btn-yellow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--yellow);
+    color:var(--black);
+    text-decoration:none;
+    font-weight:800;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    padding:16px 30px;
+    border-radius:999px;
+    transition:transform .2s ease;
+  }
+  .btn-yellow:hover{transform:translateY(-2px);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:64px 32px 48px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+  }
+  footer .logo{font-size:16px;}
+  footer .fine{
+    font-size:13px;
+    color:var(--grey);
+  }
+  footer a.ig{
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    color:var(--black);
+  }
+
+  .back-to-top{
+    position:fixed;
+    bottom:28px;
+    right:28px;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:var(--black);
+    color:var(--cream);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:100;
+    box-shadow:0 8px 20px rgba(32,32,32,0.22);
+    opacity:0;
+    transform:translateY(12px);
+    pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease, background .2s ease, color .2s ease;
+  }
+  .back-to-top.show{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+  .back-to-top:hover{
+    background:var(--yellow);
+    color:var(--black);
+  }
+  .back-to-top svg{
+    width:20px;
+    height:20px;
+    pointer-events:none;
+  }
+
+  @media (max-width:640px){
+    .back-to-top{
+      bottom:20px;
+      right:20px;
+      width:46px;
+      height:46px;
+    }
+  }
+
+  /* ---------- ACCEPT CHECKBOX ---------- */
+  .accept-check{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    max-width:420px;
+    margin:0 auto 28px;
+    cursor:pointer;
+    text-align:left;
+  }
+  .accept-check input{
+    position:absolute;
+    opacity:0;
+    width:0;
+    height:0;
+  }
+  .checkbox-box{
+    flex-shrink:0;
+    width:24px;
+    height:24px;
+    border-radius:6px;
+    border:2px solid var(--yellow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:1px;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .checkbox-box svg{
+    width:14px;
+    height:14px;
+    color:var(--black);
+    opacity:0;
+    transition:opacity .15s ease;
+  }
+  .accept-check input:checked + .checkbox-box{
+    background:var(--yellow);
+  }
+  .accept-check input:checked + .checkbox-box svg{
+    opacity:1;
+  }
+  .checkbox-label{
+    font-size:14px;
+    color:rgba(254,253,250,0.85);
+    line-height:1.5;
+  }
+  .checkbox-label strong{color:var(--cream);}
+
+  .btn-yellow:disabled{
+    opacity:0.4;
+    cursor:not-allowed;
+    transform:none !important;
+  }
+
+  /* ---------- ACCEPTANCE MODAL ---------- */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(32,32,32,0.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    z-index:200;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .modal-overlay.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .modal-box{
+    background:var(--cream);
+    border-radius:24px;
+    border:2px solid var(--black);
+    padding:40px 36px;
+    max-width:460px;
+    width:100%;
+    max-height:88vh;
+    overflow-y:auto;
+    position:relative;
+    transform:translateY(16px);
+    transition:transform .25s ease;
+  }
+  .modal-overlay.show .modal-box{transform:translateY(0);}
+  .modal-close{
+    position:absolute;
+    top:18px;
+    right:18px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:transparent;
+    border:1.5px solid var(--rule);
+    color:var(--black);
+    font-size:14px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .2s ease;
+  }
+  .modal-close:hover{background:var(--yellow); border-color:var(--black);}
+
+  .modal-box h3{
+    font-size:24px;
+    font-weight:900;
+    margin:6px 0 8px;
+    letter-spacing:-0.01em;
+  }
+  .modal-sub{
+    font-size:13.5px;
+    color:var(--grey);
+    font-weight:500;
+    margin:0 0 24px;
+    max-width:360px;
+  }
+
+  .field-label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    color:var(--grey);
+    margin:0 0 6px;
+  }
+  .field-input{
+    width:100%;
+    font-family:'Archivo', sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--black);
+    background:var(--cream);
+    border:2px solid var(--black);
+    border-radius:10px;
+    padding:11px 14px;
+    margin-bottom:16px;
+    outline:none;
+    -webkit-user-select:text;
+    user-select:text;
+  }
+  .field-input:focus{box-shadow:0 0 0 3px rgba(255,213,95,0.5);}
+  .field-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  select.field-input{cursor:pointer;}
+
+  .form-error{
+    font-size:12.5px;
+    font-weight:700;
+    color:#B5482B;
+    margin:-6px 0 12px;
+    min-height:16px;
+  }
+
+  #acceptForm .btn-yellow, #successView .btn-yellow{
+    width:100%;
+    justify-content:center;
+    margin-top:4px;
+  }
+
+  .success-view{
+    display:none;
+    text-align:center;
+    padding:20px 0 4px;
+  }
+  .success-view.show{display:block;}
+  .success-mark{
+    display:inline-block;
+    font-size:40px;
+    color:var(--yellow);
+    -webkit-text-stroke:1.5px var(--black);
+    margin-bottom:14px;
+  }
+  .success-view h3{
+    font-size:24px;
+    font-weight:900;
+    margin:0 0 12px;
+  }
+  .success-view p{
+    font-size:14px;
+    color:var(--grey);
+    font-weight:500;
+    margin:0 0 26px;
+    max-width:340px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  @media (max-width:480px){
+    .field-row{grid-template-columns:1fr;}
+    .modal-box{padding:32px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="#top">YELLOWER®</a>
+    <nav class="nav-links">
+      <a href="https://yellowerdesignstudio.com/">Volver al sitio ↗</a>
+      <a href="#terminos">Términos</a>
+      <a class="nav-cta" href="#aceptar">Aceptar ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <p class="eyebrow">Yellower Design Studio® ✳ Documento legal</p>
+    <h1>Términos &amp;<br><span class="editorial">condiciones</span> del servicio.</h1>
+    <p class="lead">Antes de trabajar juntas, dejemos claro cómo funciona nuestra relación creativa: tiempos, pagos, alcance y responsabilidades — <span class="editorial">con intención.</span></p>
+    <div class="hero-meta">
+      <div>
+        <p class="eyebrow">Representa</p>
+        <p>Yaneth Plazas, Creative Director & Founder</p>
+      </div>
+      <div>
+        <p class="eyebrow">Aplica a</p>
+        <p>Todo servicio contratado con Yellower Design Studio®</p>
+      </div>
+      <div>
+        <p class="eyebrow">Vigencia</p>
+        <p>Desde la fecha de aceptación del pago inicial</p>
+      </div>
+    </div>
+
+    <div class="positioning">
+      <p class="p-tagline">✦ Marcas con intención ✦</p>
+      <p class="p-services">Branding · Social Media · Diseño Web</p>
+      <p class="p-audience">Para empresas, emprendimientos y marcas personales 🤍</p>
+      <span class="p-scope">LATAM + Worldwide</span>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="accent">CLARIDAD</span><span>✦</span><span>COMPROMISO</span><span>✦</span><span class="accent">RESPETO POR EL PROCESO</span><span>✦</span><span>TRABAJO CON INTENCIÓN</span><span>✦</span>
+      <span class="accent">CLARIDAD</span><span>✦</span><span>COMPROMISO</span><span>✦</span><span class="accent">RESPETO POR EL PROCESO</span><span>✦</span><span>TRABAJO CON INTENCIÓN</span><span>✦</span>
+    </div>
+  </div>
+
+  <div class="acceptance-wrap">
+    <div class="acceptance">
+      <span class="mark">✳</span>
+      <p>Al contratar cualquier servicio de Yellower Design Studio®, el cliente acepta los presentes Términos y Condiciones. La aprobación de la propuesta —por correo, WhatsApp, formulario, reunión u otro medio verificable— junto con el pago inicial acordado, constituye aceptación expresa de lo aquí establecido.</p>
+    </div>
+  </div>
+
+  <div class="content-wrap" id="terminos">
+    <aside class="toc">
+      <p class="eyebrow">En este documento</p>
+      <ol>
+        <li><a href="#c1"><span class="n">01</span> Servicios</a></li>
+        <li><a href="#c2"><span class="n">02</span> Inicio y aceptación</a></li>
+        <li><a href="#c3"><span class="n">03</span> Horario y tiempos</a></li>
+        <li><a href="#c4"><span class="n">04</span> Diseño y revisiones</a></li>
+        <li><a href="#c5"><span class="n">05</span> Aprobación del cliente</a></li>
+        <li><a href="#c6"><span class="n">06</span> Pagos, mora y suspensión</a></li>
+        <li><a href="#c7"><span class="n">07</span> Comunicación y reclamos</a></li>
+        <li><a href="#c8"><span class="n">08</span> Alcance y resultados</a></li>
+        <li><a href="#c9"><span class="n">09</span> Propiedad intelectual</a></li>
+        <li><a href="#c10"><span class="n">10</span> Respaldo y confidencialidad</a></li>
+        <li><a href="#c11"><span class="n">11</span> Cancelaciones y retracto</a></li>
+        <li><a href="#c12"><span class="n">12</span> Entrega de servicios</a></li>
+        <li><a href="#c13"><span class="n">13</span> Uso de Inteligencia Artificial</a></li>
+      </ol>
+    </aside>
+
+    <div class="clauses">
+
+      <article class="clause" id="c1">
+        <div class="clause-head"><span class="clause-num">01</span><h2>Servicios</h2></div>
+        <div class="body">
+          <p>Yellower Design Studio® presta servicios creativos y digitales como branding, diseño gráfico, dirección creativa, diseño web, redes sociales, contenido, estrategia, diseño editorial y servicios relacionados.</p>
+          <p>El alcance, precio, entregables y tiempos de cada proyecto serán los establecidos en la propuesta, cotización o acuerdo realizado con el cliente.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c2">
+        <div class="clause-head"><span class="clause-num">02</span><h2>Inicio y aceptación</h2></div>
+        <div class="body">
+          <p>El proyecto comenzará una vez recibido el pago inicial acordado y la información o materiales necesarios para trabajar.</p>
+          <p>La aprobación mediante correo, WhatsApp, formulario, reunión u otro medio verificable, junto con el pago inicial, constituirá <span class="callout">aceptación de la propuesta y de los Términos y Condiciones</span> vigentes al momento de la contratación.</p>
+          <p>Cuando sea aplicable la normativa de protección al consumidor, Yellower Design Studio® respetará los derechos legales que correspondan al cliente y no se entenderá que estos son renunciados por la aceptación de estos términos.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c3">
+        <div class="clause-head"><span class="clause-num">03</span><h2>Horario y tiempos de respuesta</h2></div>
+        <div class="body">
+          <p>El horario habitual de atención es de <strong>lunes a viernes, de 8:00 a.m. a 4:00 p.m.</strong>, hora Colombia.</p>
+          <p>Los mensajes recibidos fuera de este horario serán atendidos durante el siguiente día hábil.</p>
+          <p>Los tiempos de respuesta no equivalen necesariamente a tiempos de ejecución o entrega.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c4">
+        <div class="clause-head"><span class="clause-num">04</span><h2>Diseño, revisiones y correcciones</h2></div>
+        <div class="body">
+          <p>Salvo que se acuerde algo diferente, cada servicio incluye <strong>una ronda de ajustes y un cambio por pieza o material</strong>.</p>
+          <p>Cambios adicionales, nuevas versiones o solicitudes fuera del alcance inicialmente contratado podrán generar costos adicionales.</p>
+          <p>Las correcciones necesarias para que un entregable cumpla con lo expresamente acordado no serán consideradas cambios adicionales.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c5">
+        <div class="clause-head"><span class="clause-num">05</span><h2>Aprobación del cliente</h2></div>
+        <div class="body">
+          <p>El cliente deberá revisar y aprobar textos, diseños, datos, enlaces, fotografías, videos y demás materiales antes de su publicación o entrega final.</p>
+          <p>Yellower Design Studio® no será responsable por errores provenientes de información suministrada o previamente aprobada por el cliente.</p>
+          <p>Los cambios solicitados después de una aprobación podrán generar tiempos o costos adicionales.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c6">
+        <div class="clause-head"><span class="clause-num">06</span><h2>Pagos, mora y suspensión</h2></div>
+        <div class="body">
+          <p>Los servicios deberán contar con los pagos acordados para iniciar y continuar su desarrollo. En servicios mensuales o por fases, el pago debe realizarse según las fechas establecidas al inicio.</p>
+
+          <a class="bold-btn" href="https://checkout.bold.co/payment/LNK_QBI7F5ZOXX" target="_blank" rel="noopener">
+            <span>Pagar con BOLD</span>
+            <span class="bold-arrow">↗</span>
+          </a>
+
+          <div class="alt-payments">
+            <p class="eyebrow">También aceptamos</p>
+            <div class="number-row">
+              <p>Nequi, Daviplata o Bre-B al número <strong>313 455 3455</strong></p>
+              <button type="button" class="copy-btn" data-copy="3134553455" aria-label="Copiar número">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="9" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2"/></svg>
+                <span class="copy-label">Copiar</span>
+              </button>
+            </div>
+          </div>
+
+          <p>El cliente tendrá un periodo de gracia de <strong>2 días calendario</strong> tras la fecha fijada. Transcurrido este tiempo sin recibir el pago, Yellower Design Studio® pausará el servicio, publicaciones o entregas programadas hasta la cancelación del saldo pendiente.</p>
+          <p><span class="callout">No se aplicarán intereses ni recargos adicionales por mora</span>, pero la falta de pago pausará el calendario de trabajo sin penalidad ni responsabilidad para el estudio. No se entregarán archivos finales ni se publicará contenido mientras existan pagos vencidos.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c7">
+        <div class="clause-head"><span class="clause-num">07</span><h2>Comunicación, solicitudes y reclamaciones</h2></div>
+        <div class="body">
+          <p>Los canales oficiales son correo electrónico, <a href="https://wa.me/573134553455" target="_blank" rel="noopener" style="text-decoration:underline;">WhatsApp</a>, <a href="https://calendar.app.google/DcmWvT41UvfwSJD48" target="_blank" rel="noopener" style="text-decoration:underline;">Google Meet</a> y los demás canales expresamente acordados con el cliente.</p>
+          <p>Los cambios importantes, aprobaciones, solicitudes adicionales o modificaciones económicas podrán requerir confirmación escrita.</p>
+          <p>El cliente podrá presentar solicitudes, quejas o reclamaciones a través de los canales oficiales publicados por Yellower Design Studio®. Estas serán atendidas dentro de los términos establecidos por la normativa colombiana aplicable.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c8">
+        <div class="clause-head"><span class="clause-num">08</span><h2>Alcance y resultados</h2></div>
+        <div class="body">
+          <p>Yellower Design Studio® se compromete a prestar profesionalmente los servicios contratados, pero <span class="callout">no garantiza resultados específicos</span> como ventas, seguidores, alcance, viralidad, conversiones o crecimiento determinado.</p>
+          <p>Estos resultados también dependen de factores externos como mercado, algoritmos, inversión publicitaria, producto, competencia, comportamiento del público y decisiones comerciales del cliente.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c9">
+        <div class="clause-head"><span class="clause-num">09</span><h2>Propiedad intelectual y material proporcionado por el cliente</h2></div>
+        <div class="body">
+          <p>Los derechos de uso sobre los entregables finales se regirán por lo establecido en la propuesta o acuerdo correspondiente y estarán sujetos al <strong>pago completo del proyecto</strong>.</p>
+          <p>Los bocetos, propuestas descartadas, metodologías, archivos internos y materiales no incluidos expresamente dentro de los entregables no hacen parte de la entrega.</p>
+          <p>El cliente es responsable del origen y autorización de uso de todos los materiales que suministre, incluyendo fotografías, videos, diseños, textos, música, logotipos, publicaciones, archivos descargados de Internet o contenido perteneciente a terceros o competidores.</p>
+          <p>Al entregar dichos materiales, el cliente declara que cuenta con los derechos, licencias o permisos necesarios para utilizarlos, editarlos, adaptarlos y publicarlos.</p>
+          <p>Si el cliente entrega contenido perteneciente a una competencia o tercero para reeditarlo, reutilizarlo o modificarlo, será responsable de contar con las autorizaciones correspondientes.</p>
+          <p>Yellower Design Studio® podrá rechazar solicitudes que impliquen copiar, reproducir o reeditar material ajeno cuando existan dudas razonables sobre sus derechos de uso.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c10">
+        <div class="clause-head"><span class="clause-num">10</span><h2>Respaldo, confidencialidad y portafolio</h2></div>
+        <div class="body">
+          <p>El cliente es responsable de conservar los archivos finales entregados.</p>
+          <p>Yellower Design Studio® podrá conservar archivos del proyecto hasta <strong>6 meses</strong> después de finalizado el servicio, sin garantizar almacenamiento permanente.</p>
+          <p>La recuperación y reenvío de un archivo que continúe disponible podrá tener un costo administrativo de <span class="cost">USD $12 por archivo</span> o su equivalente.</p>
+          <p>La información identificada como confidencial será tratada como tal.</p>
+          <p>Salvo acuerdo de confidencialidad o restricción previamente aceptada, Yellower Design Studio® podrá mostrar los trabajos finalizados en su <strong>portafolio, redes sociales, página web o presentaciones profesionales</strong>.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c11">
+        <div class="clause-head"><span class="clause-num">11</span><h2>Cancelaciones, retracto e inactividad del cliente</h2></div>
+        <div class="body">
+          <p>Conforme al artículo 47 de la Ley 1480 de 2011, el <span class="callout">derecho de retracto no aplicará</span> en contratos de prestación de servicios cuyo desarrollo haya iniciado con la autorización expresa del cliente, ni en bienes o entregables confeccionados plenamente según las especificaciones o personalización solicitada.</p>
+          <p>Por lo anterior, los trabajos correctamente ejecutados o ya desarrollados no serán reembolsables únicamente por decisión posterior del cliente. Si un proyecto aún no ha iniciado, una solicitud de cancelación podrá evaluarse teniendo en cuenta la reserva de agenda, costos administrativos o financieros asumidos y actividades previamente realizadas.</p>
+          <p>Cuando el cliente solicite o autorice que un servicio comience inmediatamente, dicha autorización quedará registrada por un medio verificable cuando sea necesario. Los retrasos causados por falta de información, materiales, aprobaciones o respuestas del cliente no generan automáticamente derecho a reembolso.</p>
+          <p><strong>Inactividad:</strong> Si el cliente no suministra información, insumos o correcciones durante más de <strong>30 días calendario</strong> consecutivos sin previa justificación escrita, el proyecto se considerará pausado por abandono. Su reactivación estará sujeta a la disponibilidad de agenda y podrá generar un costo administrativo de reactivación.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c12">
+        <div class="clause-head"><span class="clause-num">12</span><h2>Entrega de servicios</h2></div>
+        <div class="body">
+          <p>Los servicios y entregables de Yellower Design Studio® son principalmente digitales y serán enviados mediante los canales acordados.</p>
+          <p>Los tiempos de desarrollo comienzan cuando se haya recibido el pago correspondiente y toda la información necesaria para trabajar.</p>
+          <p>Si el cliente demora la entrega de información, accesos, contenidos o aprobaciones, las fechas podrán extenderse proporcionalmente.</p>
+          <p>Yellower Design Studio® no realiza habitualmente envíos físicos. Si un proyecto incluye productos físicos, sus costos, cobertura y condiciones de envío serán informados previamente.</p>
+        </div>
+      </article>
+
+      <article class="clause" id="c13">
+        <div class="clause-head"><span class="clause-num">13</span><h2>Uso de Inteligencia Artificial</h2></div>
+        <div class="body">
+          <p>Yellower Design Studio® podrá utilizar herramientas de Inteligencia Artificial como apoyo dentro de procesos creativos, estratégicos, gráficos, audiovisuales, de investigación, edición, automatización o generación de contenido.</p>
+          <p>Estas herramientas serán utilizadas bajo <strong>dirección, criterio, selección, edición y supervisión humana</strong>.</p>
+          <p>Cuando la IA tenga una participación relevante en fotografías, videos, ilustraciones, voces u otros elementos utilizados en el resultado final, el cliente será informado.</p>
+          <p>Si el cliente no dispone de determinados recursos visuales o audiovisuales, Yellower Design Studio® podrá proponer alternativas creadas, modificadas o complementadas mediante IA.</p>
+          <p>Si fuera necesario utilizar fotografías, videos, documentos o archivos suministrados por el cliente dentro de una herramienta externa de IA, se informará previamente qué material será utilizado y con qué finalidad.</p>
+          <p>Los archivos confidenciales, privados o sensibles no serán incorporados deliberadamente en dichas plataformas sin conocimiento y autorización previa del cliente.</p>
+          <p>Yellower Design Studio® procurará utilizar herramientas cuyas condiciones permitan el uso previsto de los resultados, incluyendo uso comercial cuando corresponda. Sin embargo, no se garantiza exclusividad absoluta sobre elementos generados exclusivamente mediante IA.</p>
+          <p>Si el cliente requiere que un proyecto no utilice Inteligencia Artificial, deberá informarlo antes de iniciar el servicio, ya que esta condición podrá modificar el alcance, metodología, tiempos o presupuesto.</p>
+          <p>Estos Términos y Condiciones se regirán principalmente por la legislación de la República de Colombia. Ninguna disposición aquí contenida pretende excluir, limitar o desconocer los derechos irrenunciables que correspondan a los consumidores conforme a la Ley 1480 de 2011 y demás normas aplicables. En caso de existir una disposición contractual incompatible con una norma imperativa de protección al consumidor, prevalecerá la norma legal aplicable.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="sign-wrap" id="aceptar">
+    <div class="signature">
+      <p class="eyebrow">Último paso</p>
+      <h2>Confirmemos tu <span class="editorial">aceptación.</span></h2>
+      <p>Marca la casilla y completa tus datos. Te enviaremos una copia de estos términos a tu correo.</p>
+
+      <label class="accept-check">
+        <input type="checkbox" id="acceptCheckbox">
+        <span class="checkbox-box"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 13L9.5 17.5L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="checkbox-label">He leído y acepto los <strong>Términos y Condiciones</strong> de Yellower Design Studio®.</span>
+      </label>
+
+      <button type="button" class="btn-yellow" id="openFormBtn" disabled>Aceptar y continuar ↗</button>
+    </div>
+  </div>
+
+  <!-- ---------- ACCEPTANCE MODAL ---------- -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Cerrar">✕</button>
+
+      <div id="formView">
+        <p class="eyebrow">✳ Confirmación de aceptación</p>
+        <h3>Completa tus datos</h3>
+        <p class="modal-sub">Con esto confirmamos que aceptaste los términos, y te enviamos una copia a tu correo.</p>
+
+        <form id="acceptForm">
+          <label class="field-label" for="f-nombre">Nombre completo</label>
+          <input class="field-input" type="text" id="f-nombre" name="nombre" required>
+
+          <div class="field-row">
+            <div>
+              <label class="field-label" for="f-tipoId">Tipo de identificación</label>
+              <select class="field-input" id="f-tipoId" name="tipoId" required>
+                <option value="">Selecciona…</option>
+                <option value="Cédula">Cédula</option>
+                <option value="ID exterior">ID exterior</option>
+                <option value="Pasaporte">Pasaporte</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="f-numeroId">Número de identificación</label>
+              <input class="field-input" type="text" id="f-numeroId" name="numeroId" required>
+            </div>
+          </div>
+
+          <label class="field-label" for="f-whatsapp">WhatsApp</label>
+          <input class="field-input" type="tel" id="f-whatsapp" name="whatsapp" placeholder="+57 300 000 0000" required>
+
+          <label class="field-label" for="f-correo">Correo electrónico</label>
+          <input class="field-input" type="email" id="f-correo" name="correo" required>
+
+          <p class="form-error" id="formError">&nbsp;</p>
+
+          <button type="submit" class="btn-yellow" id="submitBtn" disabled>Confirmar aceptación ↗</button>
+        </form>
+      </div>
+
+      <div id="successView" class="success-view">
+        <span class="success-mark">✳</span>
+        <h3>¡Listo!</h3>
+        <p>Registramos tu aceptación de los Términos y Condiciones. Te enviamos una copia a tu correo electrónico.</p>
+        <button type="button" class="btn-yellow" id="closeSuccessBtn">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <a class="logo" href="#top">YELLOWER®</a>
+    </div>
+    <p class="fine">© 2026 Yellower Design Studio® — Todos los derechos reservados.</p>
+    <a class="ig" href="https://www.instagram.com/yellower.co/" target="_blank" rel="noopener">Instagram · @yellower.co ↗</a>
+  </footer>
+
+</main>
+
+<button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M12 5L6 11M12 5L18 11" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+  (function(){
+    const btn = document.getElementById('backToTop');
+
+    function toggleVisibility(){
+      if(window.scrollY > 400){
+        btn.classList.add('show');
+      } else {
+        btn.classList.remove('show');
+      }
+    }
+
+    window.addEventListener('scroll', toggleVisibility, { passive:true });
+    toggleVisibility();
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
+  })();
+
+  // ---------- COPY PAYMENT NUMBER ----------
+  (function(){
+    const copyBtn = document.querySelector('.copy-btn');
+    if(!copyBtn) return;
+    const label = copyBtn.querySelector('.copy-label');
+    const originalText = label.textContent;
+    const value = copyBtn.dataset.copy;
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          await navigator.clipboard.writeText(value);
+        } else {
+          const temp = document.createElement('textarea');
+          temp.value = value;
+          temp.style.position = 'fixed';
+          temp.style.opacity = '0';
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+        }
+        copyBtn.classList.add('copied');
+        label.textContent = 'Copiado ✓';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          label.textContent = originalText;
+        }, 1800);
+      } catch(err){
+        label.textContent = 'Error';
+        setTimeout(() => { label.textContent = originalText; }, 1800);
+      }
+    });
+  // ---------- ACCEPTANCE FORM ----------
+  (function(){
+    // ⚠️ IMPORTANT: replace this with your own Google Apps Script Web App URL.
+    // See the setup guide provided alongside this file.
+    const GOOGLE_SCRIPT_URL = 'PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT';
+
+    const checkbox = document.getElementById('acceptCheckbox');
+    const openFormBtn = document.getElementById('openFormBtn');
+    const overlay = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const form = document.getElementById('acceptForm');
+    const formView = document.getElementById('formView');
+    const successView = document.getElementById('successView');
+    const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const formError = document.getElementById('formError');
+
+    const requiredFields = [
+      document.getElementById('f-nombre'),
+      document.getElementById('f-tipoId'),
+      document.getElementById('f-numeroId'),
+      document.getElementById('f-whatsapp'),
+      document.getElementById('f-correo')
+    ];
+
+    // The confirm button stays locked until the checkbox is accepted AND
+    // every mandatory field has a value — not just on submit attempt.
+    function updateSubmitState(){
+      const allFilled = requiredFields.every(field => field.value.trim() !== '');
+      submitBtn.disabled = !(checkbox.checked && allFilled);
+    }
+
+    requiredFields.forEach(field => {
+      field.addEventListener('input', updateSubmitState);
+      field.addEventListener('change', updateSubmitState);
+    });
+
+    checkbox.addEventListener('change', () => {
+      openFormBtn.disabled = !checkbox.checked;
+      updateSubmitState();
+    });
+
+    function openModal(){
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      updateSubmitState();
+    }
+    function closeModal(){
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    openFormBtn.addEventListener('click', () => {
+      if(!checkbox.checked) return;
+      openModal();
+    });
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+      if(e.target === overlay) closeModal();
+    });
+    closeSuccessBtn.addEventListener('click', () => {
+      closeModal();
+      // reset to the form view for any future use of the modal
+      setTimeout(() => {
+        successView.classList.remove('show');
+        formView.style.display = '';
+        form.reset();
+        updateSubmitState();
+      }, 250);
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formError.textContent = '\u00A0';
+
+      const data = {
+        nombre: document.getElementById('f-nombre').value.trim(),
+        tipoId: document.getElementById('f-tipoId').value,
+        numeroId: document.getElementById('f-numeroId').value.trim(),
+        whatsapp: document.getElementById('f-whatsapp').value.trim(),
+        correo: document.getElementById('f-correo').value.trim(),
+        documento: 'Términos y Condiciones — Yellower Design Studio®',
+        fecha: new Date().toISOString()
+      };
+
+      if(!data.nombre || !data.tipoId || !data.numeroId || !data.whatsapp || !data.correo){
+        formError.textContent = 'Por favor completa todos los campos.';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando…';
+
+      try {
+        // 'no-cors' is required because Apps Script Web Apps don't return
+        // CORS headers for anonymous requests — we can't read the response,
+        // but the request still reaches the script and runs normally.
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(data)
+        });
+
+        formView.style.display = 'none';
+        successView.classList.add('show');
+      } catch(err){
+        formError.textContent = 'No pudimos enviar tu confirmación. Intenta de nuevo.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirmar aceptación ↗';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
