@@ -1,0 +1,55 @@
+/* ---------- CURRENCY SWITCH ---------- */
+.currency-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--black, #202020);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: transparent;
+  border: 2px solid var(--black, #202020);
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 28px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--black, #202020);
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--yellow, #FFD45F);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
