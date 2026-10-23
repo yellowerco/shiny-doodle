@@ -748,3 +748,97 @@
         <span class="t-check">✓</span>
         <p>Informamos cuando la IA participa sustancialmente en los entregables.</p>
       </div>
+      <div class="t-item">
+        <span class="t-check">✓</span>
+        <p>Protegemos la información de nuestros clientes y solicitamos las autorizaciones correspondientes cuando se requiere utilizar sus materiales o datos personales en herramientas externas.</p>
+      </div>
+      <div class="t-item">
+        <span class="t-check">✓</span>
+        <p>Respetamos los derechos de autor y las condiciones de uso comercial, reconociendo que los resultados generados exclusivamente mediante IA pueden tener limitaciones de exclusividad y protección.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="privacy-wrap reveal">
+    <div class="privacy">
+      <div class="privacy-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="privacy-text">
+        <h3>¿Tu proyecto requiere utilizar datos o materiales con IA?</h3>
+        <p><strong>Tu privacidad importa.</strong> Si necesitamos utilizar fotografías, videos, voces o datos personales en herramientas de IA, te informaremos y solicitaremos tu autorización cuando corresponda.</p>
+      </div>
+      <a class="btn-auth" href="https://yellowerdesignstudio.com/ia/autorizacion">Conocer y autorizar ↗</a>
+    </div>
+  </div>
+
+  <div class="no-ai-wrap reveal">
+    <div class="no-ai">
+      <div>
+        <h3>¿Prefieres un proyecto sin IA?</h3>
+        <p>Puedes solicitarlo antes de comenzar. Evaluaremos juntos las alternativas y cualquier ajuste necesario en tiempos o presupuesto.</p>
+      </div>
+      <a class="btn-black" href="https://wa.me/573134553455?text=Hola%20Yellower%2C%20quisiera%20un%20proyecto%20sin%20Inteligencia%20Artificial" target="_blank" rel="noopener">Cuéntanos ↗</a>
+    </div>
+  </div>
+
+  <div class="philosophy-wrap reveal">
+    <div class="philosophy">
+      <p class="eyebrow">✳ Nuestra filosofía</p>
+      <blockquote>No trabajamos para que la IA cree por nosotros. Trabajamos con ella para <span class="editorial">llevar nuestras ideas más lejos.</span></blockquote>
+      <p>Eso es <strong>Yellower <span class="plus-mark">+</span> IA</strong>: un coworking consciente, donde la tecnología aporta posibilidades y las personas aportamos propósito.</p>
+    </div>
+  </div>
+
+  <p class="terms-link">Consulta nuestros <a href="https://yellowerdesignstudio.com/tyc">Términos y Condiciones</a>.</p>
+
+  <footer>
+    <div>
+      <a class="logo" href="https://yellowerdesignstudio.com/">YELLOWER®</a>
+    </div>
+    <p class="fine">© 2026 Yellower Design Studio® — Todos los derechos reservados.</p>
+    <a class="ig" href="https://www.instagram.com/yellower.co/" target="_blank" rel="noopener">Instagram · @yellower.co ↗</a>
+  </footer>
+
+</main>
+
+<button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M12 5L6 11M12 5L18 11" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+(function(){
+  // Back to top
+  const btn = document.getElementById('backToTop');
+  function toggle(){ btn.classList.toggle('show', window.scrollY > 400); }
+  window.addEventListener('scroll', toggle, { passive:true });
+  toggle();
+  btn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+  // Gentle reveal on scroll
+  const items = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          const t = entry.target;
+          setTimeout(() => { t.style.transitionDelay = ''; }, 1200);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.12 });
+    items.forEach((el, i) => {
+      el.style.transitionDelay = (el.classList.contains('step') ? (i % 4) * 0.08 : 0) + 's';
+      io.observe(el);
+    });
+  } else {
+    items.forEach(el => el.classList.add('in'));
+  }
+})();
+</script>
+
+</body>
+</html>
